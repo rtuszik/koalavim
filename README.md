@@ -1,6 +1,7 @@
 # KoalaVim
 
-neovim config heavily inspired by [LazyVim/LazyVim](https://github.com/LazyVim/LazyVim)
+Opinionated Neovim config with sensible defaults. Inspired by
+[LazyVim](https://github.com/LazyVim/LazyVim).
 
 ## Requirements
 
