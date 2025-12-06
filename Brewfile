@@ -1,0 +1,10 @@
+brew "neovim"
+brew "ripgrep"
+brew "fzf"
+brew "fd"
+brew "bat"
+brew "delta"
+brew "lazygit"
+brew "stylua"
+brew "node"
+
