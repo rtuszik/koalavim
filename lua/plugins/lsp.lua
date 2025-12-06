@@ -8,7 +8,6 @@ return {
                 vim.lsp.config(name, vim.tbl_deep_extend("force", { capabilities = caps }, opts or {}))
             end
 
-            cfg("pyright", { autostart = false })
             cfg("ruff", {})
             cfg("bashls", {})
             cfg("biome", {})
@@ -25,7 +24,6 @@ return {
             cfg("rust_analyzer", {})
 
             vim.lsp.enable {
-                "pyright",
                 "ruff",
                 "bashls",
                 "biome",
@@ -63,7 +61,6 @@ return {
         opts = {
             automatic_enable = true,
             ensure_installed = {
-                "pyright",
                 "ruff",
                 "bashls",
                 "biome",
