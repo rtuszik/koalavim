@@ -47,6 +47,9 @@ return {
                     args = { "mbake", "format", "$FILENAME" },
                     stdin = false,
                 },
+                yamlfmt = {
+                    append_args = { "-formatter", "indent=4" },
+                },
             },
         }
         return opts
