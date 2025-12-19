@@ -4,13 +4,17 @@ return {
     opts = function()
         local opts = {
             format_on_save = function(buf)
+                -- Skip if autoformat is disabled
+                if not vim.g.autoformat then
+                    return nil
+                end
                 -- Skip format for large files (>500kb) to avoid stalls
                 local max_size = 500 * 1024
                 local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
                 if ok and stats and stats.size > max_size then
                     return nil
                 end
-                return { timeout_ms = 2000, lsp_fallback = true }
+                return { timeout_ms = 2000, lsp_format = "fallback" }
             end,
             formatters_by_ft = {
                 lua = { "stylua" },

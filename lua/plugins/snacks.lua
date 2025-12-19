@@ -79,12 +79,28 @@ return {
         words = { enabled = true },
     },
     config = function(_, opts)
+        vim.g.autoformat = true -- Enable format on save by default
+
         local original_notify = vim.notify
         require("snacks").setup(opts)
         vim.ui.select = require("snacks").picker.select
         if require("lazy.core.config").plugins["noice.nvim"] then
             vim.notify = original_notify
         end
+
+        -- Format on save toggle
+        Snacks.toggle
+            .new({
+                id = "format_on_save",
+                name = "Format on Save",
+                get = function()
+                    return vim.g.autoformat
+                end,
+                set = function(_)
+                    vim.g.autoformat = not vim.g.autoformat
+                end,
+            })
+            :map("<leader>uf")
     end,
     keys = {
         {
