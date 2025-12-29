@@ -1,7 +1,10 @@
 # KoalaVim
 
-Opinionated Neovim config with sensible defaults. Inspired by
-[LazyVim](https://github.com/LazyVim/LazyVim).
+Opinionated Neovim config with sensible defaults.
+
+Contains a lot of rewrites of [LazyVim](https://github.com/LazyVim/LazyVim) custom config.
+
+Uses [lazy.nvim](https://github.com/folke/lazy.nvim) for plugin management.
 
 ## Requirements
 
@@ -68,6 +71,18 @@ _This list only mentions some of the plugins. Check the files to see all._
 - [precognition.nvim](https://github.com/tris203/precognition.nvim) - vim motion hints
 - [vim-be-good](https://github.com/ThePrimeagen/vim-be-good) - vim practice game
 
+### Git
+
+Currently, koalavim contains two plugins related to git interfaces.
+
+- [lazygit-nvim](https://github.com/kdheepak/lazygit.nvim)
+
+This plugin provides integration with the external `lazygit` tui, which is included in the Brewfile.
+
+- [neogit](https://github.com/NeogitOrg/neogit)
+
+This is a native git interface plugin which works with buffers and is much more text-based than lazygit.
+
 ## Keymaps
 
 Leader key is `Space`.
@@ -116,6 +131,7 @@ Use `<leader>sk` to search all keymaps, or press `<leader>` and wait for which-k
 | Key | Action |
 |-----|--------|
 | `<leader>gg` | lazygit |
+| `<leader>ng` | neogit |
 | `<leader>gb` | git blame line |
 | `<leader>gl` | git log |
 | `<leader>gf` | git file history |
