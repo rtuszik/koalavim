@@ -218,57 +218,6 @@ return {
                 colors = {
                     palette = {
                         gitChange = "#f087bd",
-                        -- Enhanced foreground colors for better contrast
-                        white = "#ffffff", -- was #e4e4eb
-                        offWhite = "#f8fafc", -- was #d7d7de
-                        oldWhite = "#f1f5f9", -- was #d0d0d7
-                        dimWhite = "#e2e8f0", -- was #bdbdc4
-
-                        -- Much more vibrant grays
-                        stoneGray = "#94a3b8", -- was #767c9d
-                        ashGray = "#64748b", -- was #6b7089
-                        commentGray = "#6b7280", -- was #7a7f98
-                        mutedGray = "#d1d5db", -- was #a8adc8
-
-                        -- Highly vibrant accent colors
-                        pink = "#ec4899", -- was #d0679d
-                        rose = "#f43f5e", -- was #ea9bba
-                        teal = "#14b8a6", -- was #5de4c7
-                        aqua = "#06b6d4", -- was #7ae9cc
-                        green = "#22c55e", -- was #91d7a3
-                        paleGreen = "#86efac", -- was #a8e6b8
-                        yellow = "#facc15", -- was #fffac2
-                        gold = "#f59e0b", -- was #e7d66d
-
-                        -- More saturated blues
-                        blue = "#3b82f6", -- was #78a9ff
-                        skyBlue = "#0ea5e9", -- was #add7ff
-                        deepBlue = "#2563eb", -- was #6394e6
-                        violet = "#8b5cf6", -- was #a0a0ff
-
-                        -- Brighter magentas/purples
-                        magenta = "#d946ef", -- was #f087bd
-                        purple = "#a855f7", -- was #b8a4de
-                        lavender = "#c084fc", -- was #d0c9ff
-
-                        -- More vibrant cyans
-                        cyan = "#06b6d4", -- was #89ddff
-                        brightCyan = "#22d3ee", -- was #a3e5ff
-                        paleCyan = "#67e8f9", -- was #b8eeff
-
-                        -- Enhanced syntax colors
-                        propertyBlue = "#60a5fa", -- was #8ab8ff
-                        fieldCyan = "#22d3ee", -- was #7dd0ed
-                        methodBlue = "#3b82f6", -- was #6fa8ea
-                        exceptionMagenta = "#ec4899", -- was #e087bd
-                        namespaceViolet = "#a78bfa", -- was #a89fd9
-                        booleanOrange = "#fb923c", -- was #ffb454
-                        keywordPurple = "#a855f7", -- was #bda6ed
-
-                        -- Brighter specialized colors
-                        parameterPurple = "#c084fc", -- was #c5b5e8
-                        staticGold = "#fbbf24", -- was #f0d98d
-                        readonlyTeal = "#14b8a6", -- was #6de8cb
                     },
                 },
             }
