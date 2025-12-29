@@ -1,8 +1,9 @@
 local function term_nav(dir)
     return function(self)
-        return self:is_floating() and "<c-" .. dir .. ">" or vim.schedule(function()
-            vim.cmd.wincmd(dir)
-        end)
+        return self:is_floating() and "<c-" .. dir .. ">"
+            or vim.schedule(function()
+                vim.cmd.wincmd(dir)
+            end)
     end
 end
 
@@ -41,7 +42,13 @@ return {
                         desc = "Config",
                         action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
                     },
-                    { icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
+                    {
+                        icon = "󰒲 ",
+                        key = "L",
+                        desc = "Lazy",
+                        action = ":Lazy",
+                        enabled = package.loaded.lazy ~= nil,
+                    },
                 },
                 header = [[
      ██ ▄█▀ ▒█████   ▄▄▄       ██▓    ▄▄▄    ██▒   █▓ ██▓ ███▄ ▄███▓
@@ -84,6 +91,7 @@ return {
         local original_notify = vim.notify
         require("snacks").setup(opts)
         vim.ui.select = require("snacks").picker.select
+        vim.ui.input = require("snacks").input.input
         if require("lazy.core.config").plugins["noice.nvim"] then
             vim.notify = original_notify
         end
@@ -100,7 +108,7 @@ return {
                     vim.g.autoformat = not vim.g.autoformat
                 end,
             })
-            :map("<leader>uf")
+            :map "<leader>uf"
     end,
     keys = {
         {
