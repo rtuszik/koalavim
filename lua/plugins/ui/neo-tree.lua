@@ -12,6 +12,13 @@ return {
                 if vim.fn.argc() == 1 and vim.fn.isdirectory(vim.fn.argv(0)) == 1 then
                     vim.cmd.cd(vim.fn.argv(0))
                     vim.schedule(function()
+                        -- Skip if lazy.nvim UI is visible (installing/updating plugins)
+                        for _, win in ipairs(vim.api.nvim_list_wins()) do
+                            local buf = vim.api.nvim_win_get_buf(win)
+                            if vim.bo[buf].filetype == "lazy" then
+                                return
+                            end
+                        end
                         require("neo-tree.command").execute {
                             toggle = false,
                             dir = vim.uv.cwd(),
