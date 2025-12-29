@@ -2,7 +2,7 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
-        main = "nvim-treesitter.configs", -- lazy.nvim will call this module's setup()
+        main = "nvim-treesitter", -- lazy.nvim will call this module's setup()
         opts = {
             ensure_installed = {
                 "bash",
