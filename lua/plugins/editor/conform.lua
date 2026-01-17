@@ -52,6 +52,7 @@ return {
                     stdin = false,
                 },
                 yamlfmt = {
+                    prepend_args = { "-in" },
                     append_args = { "-formatter", "indent=4" },
                 },
             },
