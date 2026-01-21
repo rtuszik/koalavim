@@ -55,6 +55,9 @@ return {
                     prepend_args = { "-in" },
                     append_args = { "-formatter", "indent=4" },
                 },
+                biome = {
+                    append_args = { "--json-formatter-expand", "always" },
+                },
             },
         }
         return opts
