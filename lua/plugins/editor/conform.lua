@@ -33,7 +33,7 @@ return {
                 terraform = { "terraform_fmt" },
                 rust = { "rustfmt" },
                 c = { "clang-format" },
-                toml = { "taplo" },
+                toml = { "tombi" },
                 php = { "php_cs_fixer" },
                 zig = { "zigfmt" },
                 scss = { "stylelint" },
@@ -41,10 +41,6 @@ return {
             formatters = {
                 prettier = {
                     prepend_args = { "--tab-width", "4", "--print-width", "100" },
-                },
-                taplo = {
-                    args = { "format", "--option", "indent_string=    ", "-" },
-                    -- The 4 spaces are between the quotes after indent_string=
                 },
                 bake = {
                     command = "uvx",
