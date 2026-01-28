@@ -81,6 +81,16 @@ return {
                 clangd = {},
                 cmake = {},
                 rust_analyzer = {},
+                harper_ls = {
+                    settings = {
+                        ["harper-ls"] = {
+                            linters = {
+                                SentenceCapitalization = false,
+                                SpellCheck = false,
+                            },
+                        },
+                    },
+                },
             },
         },
         config = function(_, opts)
