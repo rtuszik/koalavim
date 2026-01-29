@@ -37,6 +37,7 @@ return {
                 php = { "php_cs_fixer" },
                 zig = { "zigfmt" },
                 scss = { "stylelint" },
+                go = { "gofmt" },
             },
             formatters = {
                 prettier = {

@@ -17,7 +17,7 @@ return {
                 update_in_insert = false,
                 virtual_text = {
                     spacing = 4,
-                    source = "if_many",
+                    source = "true",
                     prefix = "●",
                 },
                 severity_sort = true,
@@ -37,7 +37,7 @@ return {
             },
             -- Code lens
             codelens = {
-                enabled = false,
+                enabled = true,
             },
             -- Server configurations
             servers = {
