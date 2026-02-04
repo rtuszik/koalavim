@@ -26,7 +26,7 @@ return {
                 css = { "biome" },
                 html = { "biome", "djlint" },
                 json = { "biome" },
-                yaml = { "yamlfmt" },
+                yaml = { "prettier" },
                 markdown = { "prettier" },
                 makefile = { "bake" },
                 graphql = { "biome" },
@@ -48,10 +48,10 @@ return {
                     args = { "mbake", "format", "$FILENAME" },
                     stdin = false,
                 },
-                yamlfmt = {
-                    prepend_args = { "-in" },
-                    append_args = { "-formatter", "indent=4" },
-                },
+                -- yamlfmt = {
+                --     prepend_args = { "-in" },
+                --     append_args = { "-formatter", "indent=4" },
+                -- },
                 biome = {
                     append_args = { "--json-formatter-expand", "always" },
                 },
