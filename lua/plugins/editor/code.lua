@@ -74,4 +74,9 @@ return {
             require("mini.ai").setup(opts)
         end,
     },
+    {
+        "qvalentin/helm-ls.nvim",
+        ft = "helm",
+        opts = {},
+    },
 }

@@ -135,8 +135,10 @@ return {
                             if sb and #sb.wins > 0 then
                                 ret[pos] = old_offset[pos .. "_size"] > 0 and old_offset[pos]
                                     or pos == "left" and ("%#Bold#" .. title .. "%*" .. "%#BufferLineOffsetSeparator#│%*")
-                                    or pos == "right" and ("%#BufferLineOffsetSeparator#│%*" .. "%#Bold#" .. title .. "%*")
-                                ret[pos .. "_size"] = old_offset[pos .. "_size"] > 0 and old_offset[pos .. "_size"] or sb.bounds.width
+                                    or pos == "right"
+                                        and ("%#BufferLineOffsetSeparator#│%*" .. "%#Bold#" .. title .. "%*")
+                                ret[pos .. "_size"] = old_offset[pos .. "_size"] > 0 and old_offset[pos .. "_size"]
+                                    or sb.bounds.width
                             end
                         end
                         ret.total_size = ret.left_size + ret.right_size

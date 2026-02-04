@@ -13,8 +13,6 @@ return {
         config = function(_, opts)
             local lint = require "lint"
 
-            -- --- MANUALLY DEFINE KUBE_LINTER ---
-            -- We define the full linter here to fix "Linter not found" and "parser nil"
             lint.linters.kube_linter = {
                 cmd = "kube-linter",
                 stdin = false, -- kube-linter runs against the file on disk

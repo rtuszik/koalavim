@@ -38,7 +38,25 @@ return {
                 "kawaii",
                 "stoics",
                 "angelic",
+                "kanagawa-wave",
+                "kanagawa-dragon",
+                "obscure",
+                "oasis",
+                "oasis-night",
+                "oasis-midnight",
+                "oasis-abyss",
+                "oasis-starlight",
+                "oasis-desert",
+                "oasis-sol",
+                "oasis-canyon",
+                "oasis-dune",
+                "oasis-cactus",
+                "oasis-mirage",
+                "oasis-lagoon",
+                "oasis-twilight",
+                "oasis-rose",
             },
+
             livePreview = true,
         },
         config = function(_, opts)
@@ -52,7 +70,7 @@ return {
                     return
                 end
             end
-            vim.cmd.colorscheme "tokyonight-night"
+            vim.cmd.colorscheme "kanagawa-wave"
         end,
         keys = {
             { "<leader>ut", "<cmd>Themery<cr>", desc = "Theme Switcher" },
@@ -194,10 +212,6 @@ return {
         "sponkurtus2/angelic.nvim",
         lazy = false,
         priority = 1000,
-        -- config = function()
-        --     require("angelic").setup({ transparent = true })
-        --     -- vim.cmd.colorscheme("angelic")
-        -- end,
     },
     {
         "Mofiqul/dracula.nvim",
@@ -221,14 +235,21 @@ return {
                     },
                 },
             }
-            -- Some tweaks
-            -- vim.api.nvim_create_autocmd("ColorScheme", {
-            --     pattern = "kaimandres",
-            --     callback = function()
-            --         -- Remove annoying darker blocks in Lualine (if this happens to you)
-            --         vim.api.nvim_set_hl(0, "StatusLine", { bg = "#16161e" })
-            --     end,
-            -- })
+        end,
+    },
+    { "rebelot/kanagawa.nvim", lazy = false },
+    {
+        "mslvx/obscure.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+    },
+    {
+        "uhs-robert/oasis.nvim",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            require("oasis").setup() -- (see Configuration below for all customization options)
         end,
     },
 }
