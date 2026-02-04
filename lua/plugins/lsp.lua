@@ -44,9 +44,9 @@ return {
                 ruff = {},
                 bashls = {},
                 biome = {},
-                yamlls = {
-                    format = { enabled = false },
-                },
+                -- yamlls = {
+                --     format = { enabled = false },
+                -- },
                 ansiblels = {},
                 docker_compose_language_service = {},
                 dockerls = {},
@@ -179,6 +179,17 @@ return {
                     end
                 end,
             })
+            local on_publish_diagnostics = vim.lsp.diagnostic.on_publish_diagnostics
+            opts.servers.bashls = vim.tbl_deep_extend("force", opts.servers.bashls or {}, {
+                handlers = {
+                    ["textDocument/publishDiagnostics"] = function(err, res, ...)
+                        local file_name = vim.fn.fnamemodify(vim.uri_to_fname(res.uri), ":t")
+                        if string.match(file_name, "^%.env") == nil then
+                            return on_publish_diagnostics(err, res, ...)
+                        end
+                    end,
+                },
+            })
         end,
     },
 
@@ -199,12 +210,14 @@ return {
                 "lua_ls",
                 "clangd",
                 "rust_analyzer",
-                "yamlls",
+                -- "yamlls",
                 "ansiblels",
                 "cmake",
                 "golangci_lint_ls",
                 "harper_ls",
                 "tombi",
+                "helm_ls",
+                "zls",
             },
         },
     },
