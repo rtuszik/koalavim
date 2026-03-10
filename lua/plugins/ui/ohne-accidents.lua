@@ -1,7 +1,6 @@
 return {
     "blumaa/ohne-accidents.nvim",
     event = "UIEnter",
-    ---@type OhneAccidentsConfig
     opts = {},
     keys = {
         {

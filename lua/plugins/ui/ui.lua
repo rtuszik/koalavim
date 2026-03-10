@@ -127,20 +127,24 @@ return {
                         },
                         { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
                     },
-                    lualine_x = {
-                        Snacks.profiler.status(),
-            -- stylua: ignore
-            {
-              function() return require("noice").api.status.command.get() end,
-              cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-              color = function() return { fg = Snacks.util.color("Statement") } end,
-            },
-            -- stylua: ignore
-            {
-              function() return require("noice").api.status.mode.get() end,
-              cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-              color = function() return { fg = Snacks.util.color("Constant") } end,
-            },
+	                    lualine_x = {
+	                        Snacks.profiler.status(),
+	            -- stylua: ignore
+	            {
+	              ---@diagnostic disable-next-line: undefined-field
+	              function() return require("noice").api.status.command.get() end,
+	              ---@diagnostic disable-next-line: undefined-field
+	              cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
+	              color = function() return { fg = Snacks.util.color("Statement") } end,
+	            },
+	            -- stylua: ignore
+	            {
+	              ---@diagnostic disable-next-line: undefined-field
+	              function() return require("noice").api.status.mode.get() end,
+	              ---@diagnostic disable-next-line: undefined-field
+	              cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
+	              color = function() return { fg = Snacks.util.color("Constant") } end,
+	            },
             -- stylua: ignore
             {
               function() return "  " .. require("dap").status() end,

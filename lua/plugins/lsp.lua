@@ -55,6 +55,12 @@ return {
                 lua_ls = {
                     settings = {
                         Lua = {
+                            runtime = {
+                                version = "LuaJIT",
+                            },
+                            diagnostics = {
+                                globals = { "vim", "Snacks" },
+                            },
                             workspace = {
                                 checkThirdParty = false,
                             },
@@ -81,16 +87,6 @@ return {
                 clangd = {},
                 cmake = {},
                 rust_analyzer = {},
-                harper_ls = {
-                    settings = {
-                        ["harper-ls"] = {
-                            linters = {
-                                SentenceCapitalization = false,
-                                SpellCheck = false,
-                            },
-                        },
-                    },
-                },
             },
         },
         config = function(_, opts)
@@ -214,7 +210,6 @@ return {
                 "ansiblels",
                 "cmake",
                 "golangci_lint_ls",
-                "harper_ls",
                 "tombi",
                 "helm_ls",
                 "zls",

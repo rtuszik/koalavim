@@ -9,8 +9,9 @@ return {
         -- If Neovim is started with a directory argument, open Neo-tree there
         vim.api.nvim_create_autocmd("VimEnter", {
             callback = function()
-                if vim.fn.argc() == 1 and vim.fn.isdirectory(vim.fn.argv(0)) == 1 then
-                    vim.cmd.cd(vim.fn.argv(0))
+                local arg0 = vim.fn.argv(0) --[[@as string]]
+                if vim.fn.argc() == 1 and vim.fn.isdirectory(arg0) == 1 then
+                    vim.cmd.cd(arg0)
                     vim.schedule(function()
                         -- Skip if lazy.nvim UI is visible (installing/updating plugins)
                         for _, win in ipairs(vim.api.nvim_list_wins()) do

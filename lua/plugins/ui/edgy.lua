@@ -20,6 +20,7 @@ return {
                     {
                         ft = "toggleterm",
                         size = { height = 0.4 },
+                        ---@diagnostic disable-next-line: unused-local
                         filter = function(buf, win)
                             return vim.api.nvim_win_get_config(win).relative == ""
                         end,
@@ -27,6 +28,7 @@ return {
                     {
                         ft = "noice",
                         size = { height = 0.4 },
+                        ---@diagnostic disable-next-line: unused-local
                         filter = function(buf, win)
                             return vim.api.nvim_win_get_config(win).relative == ""
                         end,
@@ -76,6 +78,7 @@ return {
                 opts[pos] = opts[pos] or {}
                 table.insert(opts[pos], {
                     ft = "trouble",
+                    ---@diagnostic disable-next-line: unused-local
                     filter = function(_buf, win)
                         return vim.w[win].trouble
                             and vim.w[win].trouble.position == pos
@@ -93,6 +96,7 @@ return {
                     ft = "snacks_terminal",
                     size = { height = 0.4 },
                     title = "%{b:snacks_terminal.id}: %{b:term_title}",
+                    ---@diagnostic disable-next-line: unused-local
                     filter = function(_buf, win)
                         return vim.w[win].snacks_win
                             and vim.w[win].snacks_win.position == pos
@@ -124,6 +128,7 @@ return {
             local Offset = require "bufferline.offset"
             if not Offset.edgy then
                 local get = Offset.get
+                ---@diagnostic disable-next-line: duplicate-set-field
                 Offset.get = function()
                     if package.loaded.edgy then
                         local old_offset = get()
@@ -131,14 +136,17 @@ return {
                         local ret = { left = "", left_size = 0, right = "", right_size = 0 }
                         for _, pos in ipairs { "left", "right" } do
                             local sb = layout[pos]
-                            local title = " Sidebar" .. string.rep(" ", sb.bounds.width - 8)
                             if sb and #sb.wins > 0 then
-                                ret[pos] = old_offset[pos .. "_size"] > 0 and old_offset[pos]
-                                    or pos == "left" and ("%#Bold#" .. title .. "%*" .. "%#BufferLineOffsetSeparator#│%*")
-                                    or pos == "right"
-                                        and ("%#BufferLineOffsetSeparator#│%*" .. "%#Bold#" .. title .. "%*")
-                                ret[pos .. "_size"] = old_offset[pos .. "_size"] > 0 and old_offset[pos .. "_size"]
-                                    or sb.bounds.width
+                                local title = " Sidebar" .. string.rep(" ", sb.bounds.width - 8)
+                                if pos == "left" then
+                                    ret.left = old_offset.left_size > 0 and old_offset.left
+                                        or ("%#Bold#" .. title .. "%*" .. "%#BufferLineOffsetSeparator#│%*")
+                                    ret.left_size = old_offset.left_size > 0 and old_offset.left_size or sb.bounds.width
+                                else
+                                    ret.right = old_offset.right_size > 0 and old_offset.right
+                                        or ("%#BufferLineOffsetSeparator#│%*" .. "%#Bold#" .. title .. "%*")
+                                    ret.right_size = old_offset.right_size > 0 and old_offset.right_size or sb.bounds.width
+                                end
                             end
                         end
                         ret.total_size = ret.left_size + ret.right_size

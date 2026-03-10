@@ -135,7 +135,7 @@ return {
         {
             "<leader>n",
             function()
-                if Snacks.config.picker and Snacks.config.picker.enabled then
+                if Snacks.config.get("picker", {}).enabled then
                     Snacks.picker.notifications()
                 else
                     Snacks.notifier.show_history()
