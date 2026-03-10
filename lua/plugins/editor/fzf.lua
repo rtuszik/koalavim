@@ -25,12 +25,15 @@ local function get_root()
         end
     end
 
-    local cwd_root = vim.fs.root(vim.uv.cwd(), markers)
-    if cwd_root then
-        return cwd_root
+    local cwd = vim.uv.cwd()
+    if cwd then
+        local cwd_root = vim.fs.root(cwd, markers)
+        if cwd_root then
+            return cwd_root
+        end
     end
 
-    return vim.uv.cwd()
+    return cwd or vim.loop.cwd()
 end
 
 return {

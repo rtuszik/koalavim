@@ -6,14 +6,17 @@ return {
             events = { "BufWritePost", "BufReadPost", "InsertLeave" },
             linters_by_ft = {
                 yaml = { "kube_linter", "trivy" },
-                -- ... your other filetypes
+                php = { "mago_lint", "mago_analyze" },
             },
             linters = {}, -- Leave empty to avoid overwrite issues
         },
         config = function(_, opts)
             local lint = require "lint"
+            ---@class KoalaLintLinter: lint.Linter
+            ---@field condition? fun(ctx: { filename: string, dirname: string }): boolean
 
             lint.linters.kube_linter = {
+                name = "kube-linter",
                 cmd = "kube-linter",
                 stdin = false, -- kube-linter runs against the file on disk
                 args = { "lint", "--format", "plain" },
@@ -28,13 +31,11 @@ return {
             }
             -- -----------------------------------
 
-            -- Apply your custom condition specifically to the linter we just defined
-            local kube = lint.linters.kube_linter
-            kube.condition = function(ctx)
+            local kube = lint.linters.kube_linter --[[@as KoalaLintLinter]]
+            kube.condition = function()
                 return vim.fn.search("apiVersion:", "nw") > 0
             end
 
-            -- Setup Trivy
             local trivy = lint.linters.trivy
             if trivy then
                 trivy.ignore_exitcode = true
@@ -77,12 +78,11 @@ return {
                 local ctx = { filename = vim.api.nvim_buf_get_name(0) }
                 ctx.dirname = vim.fn.fnamemodify(ctx.filename, ":h")
                 names = vim.tbl_filter(function(name)
-                    local linter = lint.linters[name]
+                    local linter = lint.linters[name] --[[@as KoalaLintLinter?]]
                     if not linter then
                         vim.notify("Linter not found: " .. name, vim.log.levels.WARN, { title = "nvim-lint" })
                         return false
                     end
-                    ---@diagnostic disable-next-line: undefined-field
                     return not (type(linter) == "table" and linter.condition and not linter.condition(ctx))
                 end, names)
 
