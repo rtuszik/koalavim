@@ -224,6 +224,9 @@ M._keys = nil
 
 ---@alias LazyKeysLspSpec LazyKeysSpec|{has?:string|string[], cond?:fun():boolean}
 ---@alias LazyKeysLsp LazyKeys|{has?:string|string[], cond?:fun():boolean}
+---@class KoalaLazyKeymapOpts: vim.keymap.set.Opts
+---@field cond? boolean|fun():boolean
+---@field has? string|string[]
 
 ---@return LazyKeysLspSpec[]
 function M.get()
@@ -269,7 +272,7 @@ function M.has(buffer, method)
   method = method:find("/") and method or "textDocument/" .. method
   local clients = vim.lsp.get_clients({ bufnr = buffer })
   for _, client in ipairs(clients) do
-    if client.supports_method(method) then
+    if client:supports_method(method, buffer) then
       return true
     end
   end
@@ -283,9 +286,10 @@ function M.resolve(buffer)
     return {}
   end
   local spec = vim.tbl_extend("force", {}, M.get())
-  local opts = require("lazy.core.config").plugins["nvim-lspconfig"].opts or {}
+  local plugin = require("lazy.core.config").plugins["nvim-lspconfig"]
+  local opts = plugin.opts or {}
   if type(opts) == "function" then
-    opts = opts()
+    opts = opts(plugin, {}) or {}
   end
   local clients = vim.lsp.get_clients({ bufnr = buffer })
   for _, client in ipairs(clients) do
@@ -304,7 +308,7 @@ function M.on_attach(_, buffer)
     local cond = not (keys.cond == false or ((type(keys.cond) == "function") and not keys.cond()))
 
     if has and cond then
-      local opts = Keys.opts(keys)
+      local opts = Keys.opts(keys) --[[@as KoalaLazyKeymapOpts]]
       opts.cond = nil
       opts.has = nil
       opts.silent = opts.silent ~= false
