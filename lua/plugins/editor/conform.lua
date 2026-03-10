@@ -34,7 +34,7 @@ return {
                 rust = { "rustfmt" },
                 c = { "clang-format" },
                 toml = { "tombi" },
-                php = { "php_cs_fixer" },
+                php = { "mago_format" },
                 zig = { "zigfmt" },
                 scss = { "stylelint" },
                 go = { "gofmt" },
