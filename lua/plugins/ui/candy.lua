@@ -252,4 +252,44 @@ return {
             require("oasis").setup() -- (see Configuration below for all customization options)
         end,
     },
+    -- just for fun :)
+    {
+        "axsaucedo/neovim-power-mode",
+        config = function()
+            require("power-mode").setup {
+                particles = { preset = "stars" },
+                shake = { mode = "none" },
+                fire_wall = {
+                    enabled = false,
+                    bottom_offset = 2, -- rows to skip at bottom (statusline/cmdline)
+                    max_rows = 5, -- maximum fire height in rows
+                },
+                engine = {
+                    fps = 60, -- Frames per second (10-60)
+                    stop_delay = 2000, -- ms after leaving insert to stop engine
+                },
+                combo = {
+                    enabled = true, -- Show combo counter
+                    position = "top-right", -- "top-right"|"top-left"|"bottom-right"|"bottom-left"
+                    width = 20, -- Window width
+                    height = 7, -- Window height
+                    timeout = 6000, -- ms before combo resets
+                    thresholds = { 10, 25, 50, 100, 200 }, -- Level escalation thresholds
+                    shake = true, -- Shake combo window on keystroke
+                    shake_intensity = nil, -- Override: { min, max } (nil = auto)
+                    exclamations = { -- Random phrases at milestones
+                        "UNSTOPPABLE!",
+                        "GODLIKE!",
+                        "RAMPAGE!",
+                        "MEGA KILL!",
+                        "DOMINATING!",
+                        "WICKED SICK!",
+                        "LEGENDARY!",
+                    },
+                    exclamation_interval = 10, -- Show phrase every N keystrokes
+                    exclamation_duration = 1500, -- ms to display phrase
+                },
+            }
+        end,
+    },
 }

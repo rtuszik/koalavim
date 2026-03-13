@@ -38,6 +38,7 @@ return {
                         return require("which-key.extras").expand.win()
                     end,
                 },
+                { "<leader>9", group = "99" },
                 { "gx", desc = "Open with system app" },
             },
         },
