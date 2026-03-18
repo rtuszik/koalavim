@@ -44,14 +44,23 @@ return {
                 ruff = {},
                 bashls = {},
                 biome = {},
-                -- yamlls = {
-                --     format = { enabled = false },
-                -- },
+                yamlls = {
+                    format = { enabled = false },
+                },
                 ansiblels = {},
                 docker_compose_language_service = {},
                 dockerls = {},
                 postgres_lsp = {},
                 ty = {},
+                helm_ls = {
+                    settings = {
+                        ["helm-ls"] = {
+                            yamlls = {
+                                path = "yaml-language-server",
+                            },
+                        },
+                    },
+                },
                 lua_ls = {
                     settings = {
                         Lua = {
@@ -208,7 +217,7 @@ return {
                 "lua_ls",
                 "clangd",
                 "rust_analyzer",
-                -- "yamlls",
+                "yamlls",
                 "ansiblels",
                 "cmake",
                 "golangci_lint_ls",
@@ -246,6 +255,25 @@ return {
                 "kube-linter",
                 "oxfmt",
                 "oxlint",
+            },
+        },
+    },
+    {
+        "qvalentin/helm-ls.nvim",
+        ft = "helm",
+        opts = {
+            conceal_templates = {
+                enabled = false, -- this might change to false in the future
+            },
+            indent_hints = {
+                -- enable hints for indent and nindent functions
+                enabled = true,
+                -- show the hints only for the line the cursor is on
+                only_for_current_line = true,
+            },
+            action_highlight = {
+                -- enable highlighting of the current block
+                enabled = true,
             },
         },
     },
