@@ -3,6 +3,7 @@ return {
     event = { "BufWritePre", "BufReadPost" }, -- ensure it actually loads
     opts = function()
         local has_biome = vim.fs.root(0, { "biome.json", "biome.jsonc", "biome.json5" }) ~= nil
+        local has_oxfmt_config = vim.fs.root(0, { ".oxfmtrc.json", ".oxfmtrc.jsonc", ".editorconfig" }) ~= nil
         local opts = {
             format_on_save = function(buf)
                 -- Skip if autoformat is disabled
@@ -27,7 +28,7 @@ return {
                 css = { "biome" },
                 html = { "biome", "djlint" },
                 json = has_biome and { "biome" } or { "oxfmt" },
-                yaml = has_biome and { "biome" } or { "oxfmt" },
+                yaml = has_biome and { "biome" } or { "yamlfmt" },
                 markdown = { "prettier" },
                 makefile = { "bake" },
                 graphql = { "biome" },
@@ -49,16 +50,26 @@ return {
                     args = { "mbake", "format", "$FILENAME" },
                     stdin = false,
                 },
-                -- yamlfmt = {
-                --     prepend_args = { "-in" },
-                --     append_args = { "-formatter", "indent=4" },
-                -- },
+                yamlfmt = {
+                    prepend_args = {
+                        "-formatter",
+                        "indent=4",
+                        "-formatter",
+                        "include_document_start=true",
+                        "-formatter",
+                        "retain_line_breaks_single=true",
+                        -- "-formatter",
+                        -- "indentless_arrays=true",
+                    },
+                },
                 biome = {
                     append_args = { "--json-formatter-expand", "always" },
                 },
-                -- oxfmt = {
-                --     append_args = { "--config", '{"tabWidth": 4}' },
-                -- },
+                oxfmt = {
+                    prepend_args = not has_oxfmt_config
+                            and { "--config", vim.fn.expand "~/.config/oxfmt/.oxfmtrc.json" }
+                        or {},
+                },
             },
         }
         return opts

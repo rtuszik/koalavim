@@ -70,7 +70,7 @@ return {
                     return
                 end
             end
-            vim.cmd.colorscheme "kanagawa-wave"
+            vim.cmd.colorscheme "onedark_vivid"
         end,
         keys = {
             { "<leader>ut", "<cmd>Themery<cr>", desc = "Theme Switcher" },
@@ -257,7 +257,7 @@ return {
         "axsaucedo/neovim-power-mode",
         config = function()
             require("power-mode").setup {
-                particles = { preset = "stars" },
+                particles = { preset = "emoji" },
                 shake = { mode = "none" },
                 fire_wall = {
                     enabled = false,

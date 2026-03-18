@@ -5,7 +5,7 @@ return {
         opts = {
             events = { "BufWritePost", "BufReadPost", "InsertLeave" },
             linters_by_ft = {
-                yaml = { "kube_linter", "trivy" },
+                yaml = { "kube_linter" },
                 php = { "mago_lint", "mago_analyze" },
             },
             linters = {}, -- Leave empty to avoid overwrite issues
