@@ -2,6 +2,7 @@ return {
     "stevearc/conform.nvim",
     event = { "BufWritePre", "BufReadPost" }, -- ensure it actually loads
     opts = function()
+        local has_biome = vim.fs.root(0, { "biome.json", "biome.jsonc", "biome.json5" }) ~= nil
         local opts = {
             format_on_save = function(buf)
                 -- Skip if autoformat is disabled
@@ -25,15 +26,15 @@ return {
                 typescriptreact = { "biome" },
                 css = { "biome" },
                 html = { "biome", "djlint" },
-                json = { "biome", "oxfmt" },
-                yaml = { "oxfmt" },
+                json = has_biome and { "biome" } or { "oxfmt" },
+                yaml = has_biome and { "biome" } or { "oxfmt" },
                 markdown = { "prettier" },
                 makefile = { "bake" },
                 graphql = { "biome" },
                 terraform = { "terraform_fmt" },
                 rust = { "rustfmt" },
                 c = { "clang-format" },
-                toml = { "oxfmt", "tombi" },
+                toml = has_biome and { "biome", "tombi" } or { "oxfmt", "tombi" },
                 php = { "mago_format" },
                 zig = { "zigfmt" },
                 scss = { "stylelint" },
