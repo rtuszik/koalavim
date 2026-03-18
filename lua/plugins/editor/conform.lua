@@ -25,15 +25,15 @@ return {
                 typescriptreact = { "biome" },
                 css = { "biome" },
                 html = { "biome", "djlint" },
-                json = { "biome" },
-                yaml = { "prettier" },
+                json = { "biome", "oxfmt" },
+                yaml = { "oxfmt" },
                 markdown = { "prettier" },
                 makefile = { "bake" },
                 graphql = { "biome" },
                 terraform = { "terraform_fmt" },
                 rust = { "rustfmt" },
                 c = { "clang-format" },
-                toml = { "tombi" },
+                toml = { "oxfmt", "tombi" },
                 php = { "mago_format" },
                 zig = { "zigfmt" },
                 scss = { "stylelint" },
@@ -55,6 +55,9 @@ return {
                 biome = {
                     append_args = { "--json-formatter-expand", "always" },
                 },
+                -- oxfmt = {
+                --     append_args = { "--config", '{"tabWidth": 4}' },
+                -- },
             },
         }
         return opts
