@@ -23,6 +23,7 @@ return {
                 { "g", group = "goto" },
                 { "gs", group = "surround" },
                 { "z", group = "fold" },
+                { "f", group = "fff" },
                 {
                     "<leader>b",
                     group = "buffer",
