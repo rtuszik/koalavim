@@ -63,7 +63,7 @@ return {
                     },
                 },
                 biome = {
-                    append_args = { "--json-formatter-expand", "always" },
+                    -- append_args = { "--json-formatter-expand", "always" },
                 },
                 oxfmt = {
                     prepend_args = not has_oxfmt_config
