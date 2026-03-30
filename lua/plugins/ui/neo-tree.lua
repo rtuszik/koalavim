@@ -100,9 +100,15 @@ return {
                     { "git_status", highlight = "NeoTreeDimText" },
                 },
             },
+            window = {
+                mappings = {
+                    ["f"] = "noop", -- disable filter_on_submit command (clashes with fff)
+                },
+            },
         },
         window = {
             mappings = {
+
                 ["l"] = "open",
                 ["h"] = "close_node",
                 ["<space>"] = "none",
