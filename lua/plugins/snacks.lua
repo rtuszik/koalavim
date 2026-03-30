@@ -82,7 +82,7 @@ return {
         quickfile = { enabled = true },
         scope = { enabled = true },
         scroll = { enabled = true },
-        statuscolumn = { enabled = true },
+        statuscolumn = { enabled = false },
         words = { enabled = true },
     },
     config = function(_, opts)
