@@ -32,11 +32,6 @@ return {
         opts = {},
     },
     {
-        "nmac427/guess-indent.nvim",
-        lazy = false,
-        opts = {},
-    },
-    {
         "folke/ts-comments.nvim",
         event = "VeryLazy",
         opts = {},
