@@ -145,7 +145,8 @@ return {
                                 else
                                     ret.right = old_offset.right_size > 0 and old_offset.right
                                         or ("%#BufferLineOffsetSeparator#│%*" .. "%#Bold#" .. title .. "%*")
-                                    ret.right_size = old_offset.right_size > 0 and old_offset.right_size or sb.bounds.width
+                                    ret.right_size = old_offset.right_size > 0 and old_offset.right_size
+                                        or sb.bounds.width
                                 end
                             end
                         end
