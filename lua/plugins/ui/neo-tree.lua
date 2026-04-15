@@ -79,6 +79,20 @@ return {
         popup_border_style = "rounded",
         use_popups_for_input = false,
         filesystem = {
+            components = {
+                name = function(config, node, state)
+                    local special_files = {
+                        ["config.toml"] = true,
+                        [".env"]        = true,
+                        ["Makefile"]    = true,
+                    }
+                    local result = require("neo-tree.sources.common.components").name(config, node, state)
+                    if special_files[node.name] then
+                        result.highlight = "NeoTreeFileNameSpecial"
+                    end
+                    return result
+                end,
+            },
             hijack_netrw_behavior = "disabled",
             bind_to_cwd = false,
             follow_current_file = { enabled = true },
@@ -145,6 +159,15 @@ return {
         },
     },
     config = function(_, opts)
+        local function apply_special_hl()
+            vim.api.nvim_set_hl(0, "NeoTreeFileNameSpecial", { fg = "#e5c07b", bold = true })
+        end
+        apply_special_hl()
+        vim.api.nvim_create_autocmd("ColorScheme", {
+            pattern  = "*",
+            callback = apply_special_hl,
+        })
+
         local function on_move(data)
             Snacks.rename.on_rename_file(data.source, data.destination)
         end
