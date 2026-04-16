@@ -58,7 +58,7 @@ return {
                         redhat = { telemetry = { enabled = false } },
                         yaml = {
                             schemaStore = {
-                                enable = true,
+                                enable = false,
                                 url = "https://www.schemastore.org/api/json/catalog.json",
                             },
                             format = { enabled = false },
@@ -79,6 +79,18 @@ return {
                                 ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json"] = "*api*.{yml,yaml}",
                                 ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "*compose*.{yml,yaml}",
                             },
+                        },
+                    },
+                },
+
+                jsonls = {
+                    on_new_config = function(config)
+                        config.settings.json.schemas = require("schemastore").json.schemas()
+                    end,
+                    settings = {
+                        json = {
+                            validate = { enable = true },
+                            format = { enable = false }, -- biome handles formatting
                         },
                     },
                 },
@@ -212,11 +224,7 @@ return {
 
                     -- Code lens auto-refresh
                     if opts.codelens.enabled and client and client:supports_method "textDocument/codeLens" then
-                        vim.lsp.codelens.refresh()
-                        vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-                            buffer = buffer,
-                            callback = vim.lsp.codelens.refresh,
-                        })
+                        vim.lsp.codelens.enable(true, { bufnr = buffer })
                     end
                 end,
             })
@@ -233,6 +241,8 @@ return {
             })
         end,
     },
+
+    { "b0o/schemastore.nvim", lazy = true },
 
     { "williamboman/mason.nvim", build = ":MasonUpdate", config = true },
 
@@ -254,6 +264,7 @@ return {
                 "clangd",
                 "rust_analyzer",
                 "yamlls",
+                "jsonls",
                 "ansiblels",
                 "cmake",
                 "golangci_lint_ls",
