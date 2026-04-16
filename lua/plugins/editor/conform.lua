@@ -35,7 +35,7 @@ return {
                 terraform = { "terraform_fmt" },
                 rust = { "rustfmt" },
                 c = { "clang-format" },
-                toml = has_biome and { "biome", "tombi" } or { "oxfmt", "tombi" },
+                toml = { "oxfmt", "tombi" },
                 php = { "mago_format" },
                 zig = { "zigfmt" },
                 scss = { "stylelint" },
