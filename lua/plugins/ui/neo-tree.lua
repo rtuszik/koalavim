@@ -82,9 +82,9 @@ return {
             components = {
                 name = function(config, node, state)
                     local special_files = {
-                        ["config.toml"] = true,
-                        [".env"]        = true,
-                        ["Makefile"]    = true,
+                        ["kustomization.yaml"] = true,
+                        [".env"] = true,
+                        ["mise.toml"] = true,
                     }
                     local result = require("neo-tree.sources.common.components").name(config, node, state)
                     if special_files[node.name] then
@@ -160,11 +160,11 @@ return {
     },
     config = function(_, opts)
         local function apply_special_hl()
-            vim.api.nvim_set_hl(0, "NeoTreeFileNameSpecial", { fg = "#e5c07b", bold = true })
+            vim.api.nvim_set_hl(0, "NeoTreeFileNameSpecial", { fg = "#947ce6", bold = true })
         end
         apply_special_hl()
         vim.api.nvim_create_autocmd("ColorScheme", {
-            pattern  = "*",
+            pattern = "*",
             callback = apply_special_hl,
         })
 
