@@ -16,7 +16,9 @@ require("lazy").setup {
     { import = "plugins.ui" },
     { import = "plugins.editor" },
     { import = "plugins.tools" },
+    { import = "local.plugins" },
 }
 
 require "config.keymaps"
 require "config.autocmd"
+pcall(require, "local.config")

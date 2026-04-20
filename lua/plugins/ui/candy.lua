@@ -76,9 +76,6 @@ return {
             { "<leader>ut", "<cmd>Themery<cr>", desc = "Theme Switcher" },
         },
     },
-    { "scottmckendry/cyberdream.nvim", opts = {
-        transparent = true,
-    } },
     {
         "catppuccin/nvim",
         lazy = true,
@@ -123,16 +120,6 @@ return {
         },
     },
     {
-        "mellow-theme/mellow.nvim",
-        config = function()
-            vim.g.mellow_transparent = true
-        end,
-    },
-    {
-        "nyoom-engineering/oxocarbon.nvim",
-        -- oxocarbon doesn't support transparency natively
-    },
-    {
         "folke/tokyonight.nvim",
         opts = {
             transparent = true,
@@ -142,9 +129,6 @@ return {
             },
         },
     },
-    { "ashish2508/Eezzy.nvim", opts = {
-        transparent = true,
-    } },
     {
         "mtendekuyokwa19/stoics.nvim",
         -- Check theme docs for transparency support
@@ -163,15 +147,6 @@ return {
             }
         end,
         priority = 1000, -- Ensure it loads first
-    },
-    {
-        "bluz71/vim-moonfly-colors",
-        name = "moonfly",
-        lazy = false,
-        priority = 1000,
-        config = function()
-            vim.g.moonflyTransparent = true
-        end,
     },
     {
         "rose-pine/neovim",
@@ -255,6 +230,7 @@ return {
     -- just for fun :)
     {
         "axsaucedo/neovim-power-mode",
+        enabled = false,
         config = function()
             require("power-mode").setup {
                 particles = { preset = "emoji" },
@@ -269,7 +245,7 @@ return {
                     stop_delay = 2000, -- ms after leaving insert to stop engine
                 },
                 combo = {
-                    enabled = true, -- Show combo counter
+                    enabled = false, -- Show combo counter
                     position = "top-right", -- "top-right"|"top-left"|"bottom-right"|"bottom-left"
                     width = 20, -- Window width
                     height = 7, -- Window height
