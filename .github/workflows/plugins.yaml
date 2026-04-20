@@ -1,0 +1,33 @@
+---
+name: Generate Plugin List
+
+on:
+    push:
+        branches: [main]
+        paths:
+            - "lua/plugins/**"
+    workflow_dispatch:
+
+permissions:
+    contents: write
+
+jobs:
+    generate:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v6
+
+            - name: Install Lua
+              run: sudo apt-get update && sudo apt-get install -y lua5.4
+
+            - name: Update plugin list in README
+              run: lua5.4 .github/scripts/generate-plugin-list.lua
+
+            - name: Commit changes
+              run: |
+                git config user.name "github-actions[bot]"
+                git config user.email "github-actions[bot]@users.noreply.github.com"
+                git add README.md
+                # Only commit if there are actual changes
+                git diff --cached --quiet || git commit -m "docs: update plugin list [skip ci]"
+                git push
