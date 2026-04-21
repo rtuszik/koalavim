@@ -28,7 +28,7 @@ return {
                 css = { "biome" },
                 html = { "biome", "djlint" },
                 json = has_biome and { "biome" } or { "oxfmt" },
-                yaml = has_biome and { "biome" } or { "yamlfmt" },
+                yaml = { "yamlfmt" },
                 markdown = { "prettier" },
                 makefile = { "bake" },
                 graphql = { "biome" },
