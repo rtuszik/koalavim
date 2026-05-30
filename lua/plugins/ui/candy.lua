@@ -18,50 +18,20 @@ return {
                 "rose-pine-main",
                 "rose-pine-moon",
                 "rose-pine-dawn",
-                "cyberdream",
-                "mellow",
-                "oxocarbon",
                 "onedark",
                 "onedark_vivid",
                 "onedark_dark",
-                "moonfly",
-                "nightfox",
-                "duskfox",
-                "nordfox",
-                "terafox",
-                "carbonfox",
                 "oh-lucy",
                 "oh-lucy-evening",
-                "dracula",
-                "eezzy",
-                "kaimandres",
-                "kawaii",
-                "stoics",
-                "angelic",
                 "kanagawa-wave",
                 "kanagawa-dragon",
-                "obscure",
-                "oasis",
-                "oasis-night",
-                "oasis-midnight",
-                "oasis-abyss",
-                "oasis-starlight",
-                "oasis-desert",
-                "oasis-sol",
-                "oasis-canyon",
-                "oasis-dune",
-                "oasis-cactus",
-                "oasis-mirage",
-                "oasis-lagoon",
-                "oasis-twilight",
-                "oasis-rose",
             },
 
             livePreview = true,
         },
         config = function(_, opts)
             require("themery").setup(opts)
-            -- Load persisted theme or fallback to tokyonight
+            -- Load persisted theme or fallback to onedark_vivid
             local theme_file = vim.fn.stdpath "data" .. "/themery.json"
             if vim.fn.filereadable(theme_file) == 1 then
                 local data = vim.fn.json_decode(vim.fn.readfile(theme_file))
@@ -130,14 +100,6 @@ return {
         },
     },
     {
-        "mtendekuyokwa19/stoics.nvim",
-        -- Check theme docs for transparency support
-    },
-    {
-        "Sonya-sama/kawaii.nvim",
-        -- Check theme docs for transparency support
-    },
-    {
         "olimorris/onedarkpro.nvim",
         config = function()
             require("onedarkpro").setup {
@@ -146,7 +108,7 @@ return {
                 },
             }
         end,
-        priority = 1000, -- Ensure it loads first
+        priority = 1000,
     },
     {
         "rose-pine/neovim",
@@ -167,14 +129,6 @@ return {
         end,
     },
     {
-        "EdenEast/nightfox.nvim",
-        opts = {
-            options = {
-                transparent = true,
-            },
-        },
-    },
-    {
         "yazeed1s/oh-lucy.nvim",
         lazy = false,
         priority = 1000,
@@ -182,90 +136,5 @@ return {
             vim.g.oh_lucy_transparent = true
         end,
     },
-
-    {
-        "sponkurtus2/angelic.nvim",
-        lazy = false,
-        priority = 1000,
-    },
-    {
-        "Mofiqul/dracula.nvim",
-        config = function()
-            require("dracula").setup {
-                transparent_bg = true,
-            }
-        end,
-    },
-    -- plugins/kaimandres.nvim
-    {
-        "MartelleV/kaimandres.nvim",
-        lazy = false,
-        priority = 1000,
-        config = function()
-            require("kaimandres").setup {
-                transparent = true,
-                colors = {
-                    palette = {
-                        gitChange = "#f087bd",
-                    },
-                },
-            }
-        end,
-    },
     { "rebelot/kanagawa.nvim", lazy = false },
-    {
-        "mslvx/obscure.nvim",
-        lazy = false,
-        priority = 1000,
-        opts = {},
-    },
-    {
-        "uhs-robert/oasis.nvim",
-        lazy = false,
-        priority = 1000,
-        config = function()
-            require("oasis").setup() -- (see Configuration below for all customization options)
-        end,
-    },
-    -- just for fun :)
-    {
-        "axsaucedo/neovim-power-mode",
-        enabled = false,
-        config = function()
-            require("power-mode").setup {
-                particles = { preset = "emoji" },
-                shake = { mode = "none" },
-                fire_wall = {
-                    enabled = false,
-                    bottom_offset = 2, -- rows to skip at bottom (statusline/cmdline)
-                    max_rows = 5, -- maximum fire height in rows
-                },
-                engine = {
-                    fps = 60, -- Frames per second (10-60)
-                    stop_delay = 2000, -- ms after leaving insert to stop engine
-                },
-                combo = {
-                    enabled = false, -- Show combo counter
-                    position = "top-right", -- "top-right"|"top-left"|"bottom-right"|"bottom-left"
-                    width = 20, -- Window width
-                    height = 7, -- Window height
-                    timeout = 6000, -- ms before combo resets
-                    thresholds = { 10, 25, 50, 100, 200 }, -- Level escalation thresholds
-                    shake = true, -- Shake combo window on keystroke
-                    shake_intensity = nil, -- Override: { min, max } (nil = auto)
-                    exclamations = { -- Random phrases at milestones
-                        "UNSTOPPABLE!",
-                        "GODLIKE!",
-                        "RAMPAGE!",
-                        "MEGA KILL!",
-                        "DOMINATING!",
-                        "WICKED SICK!",
-                        "LEGENDARY!",
-                    },
-                    exclamation_interval = 10, -- Show phrase every N keystrokes
-                    exclamation_duration = 1500, -- ms to display phrase
-                },
-            }
-        end,
-    },
 }
