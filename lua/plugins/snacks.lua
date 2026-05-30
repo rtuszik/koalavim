@@ -78,6 +78,7 @@ return {
                 frecency = true,
             },
         },
+        profiler = { enabled = true },
         notifier = { enabled = true },
         quickfile = { enabled = true },
         scope = { enabled = true },
@@ -109,6 +110,10 @@ return {
                 end,
             })
             :map "<leader>uf"
+
+        -- Profiler: start/stop and toggle inline highlights
+        Snacks.toggle.profiler():map "<leader>dpp"
+        Snacks.toggle.profiler_highlights():map "<leader>dph"
     end,
     keys = {
         {
@@ -131,6 +136,36 @@ return {
                 Snacks.profiler.scratch()
             end,
             desc = "Profiler Scratch Buffer",
+        },
+        {
+            "<leader>dpe",
+            function()
+                -- Traces persist after stop (until the next start), so this works
+                -- even after the on-stop picker has already opened and been closed.
+                local traces = Snacks.profiler.find { group = "name", sort = "time" }
+                if vim.tbl_isempty(traces) then
+                    return vim.notify("No profiler traces captured yet", vim.log.levels.WARN)
+                end
+                -- Each grouped row keeps its member calls as array children and
+                -- carries a live `fn` ref vim.json can't encode. Keep only the
+                -- aggregate scalars; dropping the children avoids a huge file.
+                local function clean(trace)
+                    return {
+                        name = trace.name,
+                        time = trace.time, -- nanoseconds, summed over the group
+                        count = trace.count,
+                        loc = trace.loc and {
+                            file = trace.loc.file,
+                            line = trace.loc.line,
+                            plugin = trace.loc.plugin,
+                        } or nil,
+                    }
+                end
+                local path = vim.fn.stdpath "state" .. "/snacks-profiler.json"
+                vim.fn.writefile(vim.split(vim.json.encode(vim.tbl_map(clean, traces)), "\n"), path)
+                vim.notify("Profiler traces → " .. path, vim.log.levels.INFO)
+            end,
+            desc = "Export Profiler Traces to JSON",
         },
         {
             "<leader>n",
