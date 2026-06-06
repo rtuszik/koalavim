@@ -59,14 +59,13 @@ This directory is automatically read if it exists.
 
 <!-- PLUGINS:START -->
 
-Total: **70** plugins
+Total: **61** plugins
 
 | Plugin | Link |
 |--------|------|
 | `akinsho/bufferline.nvim` | [GitHub](https://github.com/akinsho/bufferline.nvim) |
 | `antonk52/bad-practices.nvim` | [GitHub](https://github.com/antonk52/bad-practices.nvim) |
 | `aserowy/tmux.nvim` | [GitHub](https://github.com/aserowy/tmux.nvim) |
-| `axsaucedo/neovim-power-mode` | [GitHub](https://github.com/axsaucedo/neovim-power-mode) |
 | `b0o/schemastore.nvim` | [GitHub](https://github.com/b0o/schemastore.nvim) |
 | `blumaa/ohne-accidents.nvim` | [GitHub](https://github.com/blumaa/ohne-accidents.nvim) |
 | `catppuccin/nvim` | [GitHub](https://github.com/catppuccin/nvim) |
@@ -74,7 +73,6 @@ Total: **70** plugins
 | `dmtrKovalenko/fff.nvim` | [GitHub](https://github.com/dmtrKovalenko/fff.nvim) |
 | `dtormoen/neural-open.nvim` | [GitHub](https://github.com/dtormoen/neural-open.nvim) |
 | `echasnovski/mini.nvim` | [GitHub](https://github.com/echasnovski/mini.nvim) |
-| `EdenEast/nightfox.nvim` | [GitHub](https://github.com/EdenEast/nightfox.nvim) |
 | `esmuellert/vscode-diff.nvim` | [GitHub](https://github.com/esmuellert/vscode-diff.nvim) |
 | `folke/edgy.nvim` | [GitHub](https://github.com/folke/edgy.nvim) |
 | `folke/lazy.nvim` | [GitHub](https://github.com/folke/lazy.nvim) |
@@ -96,11 +94,7 @@ Total: **70** plugins
 | `kawre/neotab.nvim` | [GitHub](https://github.com/kawre/neotab.nvim) |
 | `kdheepak/lazygit.nvim` | [GitHub](https://github.com/kdheepak/lazygit.nvim) |
 | `lewis6991/gitsigns.nvim` | [GitHub](https://github.com/lewis6991/gitsigns.nvim) |
-| `MartelleV/kaimandres.nvim` | [GitHub](https://github.com/MartelleV/kaimandres.nvim) |
 | `mfussenegger/nvim-lint` | [GitHub](https://github.com/mfussenegger/nvim-lint) |
-| `Mofiqul/dracula.nvim` | [GitHub](https://github.com/Mofiqul/dracula.nvim) |
-| `mslvx/obscure.nvim` | [GitHub](https://github.com/mslvx/obscure.nvim) |
-| `mtendekuyokwa19/stoics.nvim` | [GitHub](https://github.com/mtendekuyokwa19/stoics.nvim) |
 | `MunifTanjim/nui.nvim` | [GitHub](https://github.com/MunifTanjim/nui.nvim) |
 | `NeogitOrg/neogit` | [GitHub](https://github.com/NeogitOrg/neogit) |
 | `neovim/nvim-lspconfig` | [GitHub](https://github.com/neovim/nvim-lspconfig) |
@@ -119,13 +113,10 @@ Total: **70** plugins
 | `rtuszik/nvim-remove-comments` | [GitHub](https://github.com/rtuszik/nvim-remove-comments) |
 | `saghen/blink.cmp` | [GitHub](https://github.com/saghen/blink.cmp) |
 | `sindrets/diffview.nvim` | [GitHub](https://github.com/sindrets/diffview.nvim) |
-| `Sonya-sama/kawaii.nvim` | [GitHub](https://github.com/Sonya-sama/kawaii.nvim) |
-| `sponkurtus2/angelic.nvim` | [GitHub](https://github.com/sponkurtus2/angelic.nvim) |
 | `stevearc/conform.nvim` | [GitHub](https://github.com/stevearc/conform.nvim) |
 | `szymonwilczek/vim-be-better` | [GitHub](https://github.com/szymonwilczek/vim-be-better) |
 | `ThePrimeagen/vim-be-good` | [GitHub](https://github.com/ThePrimeagen/vim-be-good) |
 | `tris203/precognition.nvim` | [GitHub](https://github.com/tris203/precognition.nvim) |
-| `uhs-robert/oasis.nvim` | [GitHub](https://github.com/uhs-robert/oasis.nvim) |
 | `WhoIsSethDaniel/mason-tool-installer.nvim` | [GitHub](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim) |
 | `williamboman/mason-lspconfig.nvim` | [GitHub](https://github.com/williamboman/mason-lspconfig.nvim) |
 | `williamboman/mason.nvim` | [GitHub](https://github.com/williamboman/mason.nvim) |
