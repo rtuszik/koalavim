@@ -26,10 +26,10 @@ return {
                 javascriptreact = { "biome" },
                 typescriptreact = { "biome" },
                 css = { "biome" },
-                html = { "biome", "djlint" },
+                html = { "biome", "djlint" } or has_oxfmt_config and { "oxfmt" },
                 json = has_biome and { "biome" } or { "oxfmt" },
-                yaml = { "yamlfmt" },
-                markdown = { "prettier" },
+                yaml = has_oxfmt_config and { "oxfmt" } or { "yamlfmt" },
+                markdown = has_oxfmt_config and { "oxfmt" } or { "prettier" },
                 makefile = { "bake" },
                 graphql = { "biome" },
                 terraform = { "terraform_fmt" },
@@ -40,6 +40,7 @@ return {
                 zig = { "zigfmt" },
                 scss = { "stylelint" },
                 go = { "gofmt" },
+                ruby = { "rubocop" },
             },
             formatters = {
                 prettier = {
