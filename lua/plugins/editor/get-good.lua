@@ -1,6 +1,6 @@
 return {
     -- vim motion hints, unusable without debounceMs set
-    { "tris203/precognition.nvim", enabled = true, opts = {
+    { "tris203/precognition.nvim", enabled = false, opts = {
         debounceMs = 5,
     } },
     -- block bad practices
