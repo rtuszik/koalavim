@@ -59,7 +59,7 @@ This directory is automatically read if it exists.
 
 <!-- PLUGINS:START -->
 
-Total: **61** plugins
+Total: **60** plugins
 
 | Plugin | Link |
 |--------|------|
@@ -71,7 +71,6 @@ Total: **61** plugins
 | `catppuccin/nvim` | [GitHub](https://github.com/catppuccin/nvim) |
 | `christoomey/vim-tmux-navigator` | [GitHub](https://github.com/christoomey/vim-tmux-navigator) |
 | `dmtrKovalenko/fff.nvim` | [GitHub](https://github.com/dmtrKovalenko/fff.nvim) |
-| `dtormoen/neural-open.nvim` | [GitHub](https://github.com/dtormoen/neural-open.nvim) |
 | `echasnovski/mini.nvim` | [GitHub](https://github.com/echasnovski/mini.nvim) |
 | `esmuellert/vscode-diff.nvim` | [GitHub](https://github.com/esmuellert/vscode-diff.nvim) |
 | `folke/edgy.nvim` | [GitHub](https://github.com/folke/edgy.nvim) |
