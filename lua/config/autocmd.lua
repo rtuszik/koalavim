@@ -118,6 +118,11 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 vim.api.nvim_create_autocmd("QuitPre", {
     group = augroup "close_neo_tree",
     callback = function()
+        -- Quitting from neo-tree itself: let :q/:qa handle it normally,
+        -- closing the current window here would abort the quit
+        if vim.bo.filetype == "neo-tree" then
+            return
+        end
         local tree_wins = {}
         local floating_wins = {}
         local wins = vim.api.nvim_list_wins()
