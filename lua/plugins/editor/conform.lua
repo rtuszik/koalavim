@@ -3,7 +3,8 @@ return {
     event = { "BufWritePre", "BufReadPost" }, -- ensure it actually loads
     opts = function()
         local has_biome = vim.fs.root(0, { "biome.json", "biome.jsonc", "biome.json5" }) ~= nil
-        local has_oxfmt_config = vim.fs.root(0, { ".oxfmtrc.json", ".oxfmtrc.jsonc", ".editorconfig" }) ~= nil
+        local has_oxfmt = vim.fs.root(0, { ".oxfmtrc.json", ".oxfmtrc.jsonc" }) ~= nil
+        local has_prettier = vim.fs.root(0, { ".prettierrc.json", ".prettierrc", ".prettierrc.yaml" }) ~= nil
         local opts = {
             format_on_save = function(buf)
                 -- Skip if autoformat is disabled
@@ -26,16 +27,16 @@ return {
                 javascriptreact = { "biome" },
                 typescriptreact = { "biome" },
                 css = { "biome" },
-                html = { "biome", "djlint" } or has_oxfmt_config and { "oxfmt" },
+                html = { "biome", "djlint" } or has_oxfmt and { "oxfmt" },
                 json = has_biome and { "biome" } or { "oxfmt" },
-                yaml = has_oxfmt_config and { "oxfmt" } or { "yamlfmt" },
-                markdown = has_oxfmt_config and { "oxfmt" } or { "prettier" },
+                yaml = has_oxfmt and { "oxfmt" } or has_biome and { "biome" } or { "prettier" },
+                markdown = has_oxfmt and { "oxfmt" } or { "prettier" },
                 makefile = { "bake" },
                 graphql = { "biome" },
                 terraform = { "terraform_fmt" },
                 rust = { "rustfmt" },
                 c = { "clang-format" },
-                toml = has_oxfmt_config and { "oxfmt" } or { "tombi" },
+                toml = has_oxfmt and { "oxfmt" } or { "tombi" },
                 php = { "mago_format" },
                 zig = { "zigfmt" },
                 scss = { "stylelint" },
@@ -44,7 +45,7 @@ return {
             },
             formatters = {
                 prettier = {
-                    prepend_args = { "--tab-width", "4", "--print-width", "100" },
+                    -- prepend_args = { "--tab-width", "4", "--print-width", "100" },
                 },
                 bake = {
                     command = "uvx",
@@ -67,8 +68,7 @@ return {
                     -- append_args = { "--json-formatter-expand", "always" },
                 },
                 oxfmt = {
-                    prepend_args = not has_oxfmt_config
-                            and { "--config", vim.fn.expand "~/.config/oxfmt/.oxfmtrc.json" }
+                    prepend_args = not has_oxfmt and { "--config", vim.fn.expand "~/.config/oxfmt/.oxfmtrc.json" }
                         or {},
                 },
             },

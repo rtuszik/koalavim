@@ -271,6 +271,7 @@ return {
                 "tombi",
                 "helm_ls",
                 "zls",
+                "rubocop",
             },
         },
     },

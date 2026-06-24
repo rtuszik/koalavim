@@ -9,6 +9,7 @@ return {
     {
         "saghen/blink.cmp",
         version = "1.*",
+        dependencies = { "L3MON4D3/LuaSnip" },
         -- dependencies = {
         --     -- "giuxtaposition/blink-cmp-copilot",
         --     -- {
@@ -23,6 +24,8 @@ return {
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
         opts = {
+            -- Use LuaSnip as the snippet engine + source (snippets/<ft>.lua)
+            snippets = { preset = "luasnip" },
             fuzzy = {
                 implementation = "rust",
             },
