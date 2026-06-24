@@ -59,7 +59,7 @@ This directory is automatically read if it exists.
 
 <!-- PLUGINS:START -->
 
-Total: **60** plugins
+Total: **61** plugins
 
 | Plugin | Link |
 |--------|------|
@@ -92,6 +92,7 @@ Total: **60** plugins
 | `jiaoshijie/undotree` | [GitHub](https://github.com/jiaoshijie/undotree) |
 | `kawre/neotab.nvim` | [GitHub](https://github.com/kawre/neotab.nvim) |
 | `kdheepak/lazygit.nvim` | [GitHub](https://github.com/kdheepak/lazygit.nvim) |
+| `L3MON4D3/LuaSnip` | [GitHub](https://github.com/L3MON4D3/LuaSnip) |
 | `lewis6991/gitsigns.nvim` | [GitHub](https://github.com/lewis6991/gitsigns.nvim) |
 | `mfussenegger/nvim-lint` | [GitHub](https://github.com/mfussenegger/nvim-lint) |
 | `MunifTanjim/nui.nvim` | [GitHub](https://github.com/MunifTanjim/nui.nvim) |
