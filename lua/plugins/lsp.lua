@@ -9,144 +9,157 @@ local diagnostic_icons = {
 return {
     {
         "neovim/nvim-lspconfig",
-        lazy = false, -- configure early so :checkhealth sees servers
-        opts = {
-            -- Diagnostic configuration
-            diagnostics = {
-                underline = true,
-                update_in_insert = false,
-                virtual_text = {
-                    spacing = 4,
-                    source = "true",
-                    prefix = "●",
-                },
-                severity_sort = true,
-                signs = {
-                    text = {
-                        [vim.diagnostic.severity.ERROR] = diagnostic_icons.Error,
-                        [vim.diagnostic.severity.WARN] = diagnostic_icons.Warn,
-                        [vim.diagnostic.severity.HINT] = diagnostic_icons.Hint,
-                        [vim.diagnostic.severity.INFO] = diagnostic_icons.Info,
+        lazy = false,
+        dependencies = { "b0o/schemastore.nvim" },
+        opts = function()
+            return {
+                -- Diagnostic configuration
+                diagnostics = {
+                    underline = true,
+                    update_in_insert = false,
+                    virtual_text = {
+                        spacing = 4,
+                        source = "true",
+                        prefix = "●",
+                    },
+                    severity_sort = true,
+                    signs = {
+                        text = {
+                            [vim.diagnostic.severity.ERROR] = diagnostic_icons.Error,
+                            [vim.diagnostic.severity.WARN] = diagnostic_icons.Warn,
+                            [vim.diagnostic.severity.HINT] = diagnostic_icons.Hint,
+                            [vim.diagnostic.severity.INFO] = diagnostic_icons.Info,
+                        },
                     },
                 },
-            },
-            -- Inlay hints
-            inlay_hints = {
-                enabled = true,
-                exclude = { "vue" },
-            },
-            -- Code lens
-            codelens = {
-                enabled = true,
-            },
-            -- Server configurations
-            servers = {
-                ruff = {},
-                bashls = {},
-                biome = {},
+                -- Inlay hints
+                inlay_hints = {
+                    enabled = true,
+                    exclude = { "vue" },
+                },
+                -- Code lens
+                codelens = {
+                    enabled = true,
+                },
+                -- Server configurations
+                servers = {
+                    ruff = {},
+                    bashls = {},
+                    biome = {},
 
-                yamlls = {
-                    capabilities = {
-                        textDocument = {
-                            foldingRange = {
-                                dynamicRegistration = false,
-                                lineFoldingOnly = true,
+                    yamlls = {
+                        capabilities = {
+                            textDocument = {
+                                foldingRange = {
+                                    dynamicRegistration = false,
+                                    lineFoldingOnly = true,
+                                },
+                            },
+                        },
+                        settings = {
+                            redhat = { telemetry = { enabled = false } },
+                            yaml = {
+                                schemaStore = {
+                                    enable = false,
+                                    url = "https://www.schemastore.org/api/json/catalog.json",
+                                },
+                                format = { enabled = false },
+                                -- enabling this conflicts between Kubernetes resources, kustomization.yaml, and Helmreleases
+                                validate = false,
+                                schemas = {
+                                    kubernetes = "*.yaml",
+                                    ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
+                                    ["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
+                                    ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json"] = "azure-pipelines*.{yml,yaml}",
+                                    ["https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/tasks"] = "roles/tasks/*.{yml,yaml}",
+                                    ["https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/playbook"] = "*play*.{yml,yaml}",
+                                    ["http://json.schemastore.org/prettierrc"] = ".prettierrc.{yml,yaml}",
+                                    ["http://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
+                                    ["http://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
+                                    ["https://json.schemastore.org/dependabot-v2"] = ".github/dependabot.{yml,yaml}",
+                                    ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = "*gitlab-ci*.{yml,yaml}",
+                                    ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json"] = "*api*.{yml,yaml}",
+                                    ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "*compose*.{yml,yaml}",
+                                    require("schemastore").yaml.schemas(),
+                                },
                             },
                         },
                     },
-                    settings = {
-                        redhat = { telemetry = { enabled = false } },
-                        yaml = {
-                            schemaStore = {
-                                enable = false,
-                                url = "https://www.schemastore.org/api/json/catalog.json",
-                            },
-                            format = { enabled = false },
-                            -- enabling this conflicts between Kubernetes resources, kustomization.yaml, and Helmreleases
-                            validate = false,
-                            schemas = {
-                                kubernetes = "*.yaml",
-                                ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
-                                ["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
-                                ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json"] = "azure-pipelines*.{yml,yaml}",
-                                ["https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/tasks"] = "roles/tasks/*.{yml,yaml}",
-                                ["https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/playbook"] = "*play*.{yml,yaml}",
-                                ["http://json.schemastore.org/prettierrc"] = ".prettierrc.{yml,yaml}",
-                                ["http://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
-                                ["http://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
-                                ["https://json.schemastore.org/dependabot-v2"] = ".github/dependabot.{yml,yaml}",
-                                ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = "*gitlab-ci*.{yml,yaml}",
-                                ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json"] = "*api*.{yml,yaml}",
-                                ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "*compose*.{yml,yaml}",
-                            },
-                        },
-                    },
-                },
 
-                jsonls = {
-                    on_new_config = function(config)
-                        config.settings.json.schemas = require("schemastore").json.schemas()
-                    end,
-                    settings = {
-                        json = {
-                            validate = { enable = true },
-                            format = { enable = false }, -- biome handles formatting
+                    jsonls = {
+                        settings = {
+                            json = {
+                                schemas = require("schemastore").json.schemas(),
+                                validate = { enable = true },
+                                format = { enable = false }, -- biome handles formatting
+                            },
                         },
                     },
-                },
 
-                ansiblels = {},
-                docker_compose_language_service = {},
-                dockerls = {},
-                postgres_lsp = {},
-                ty = {},
-                helm_ls = {
-                    settings = {
-                        ["helm-ls"] = {
-                            yamlls = {
-                                path = "yaml-language-server",
+                    ansiblels = {},
+                    docker_compose_language_service = {},
+                    dockerls = {},
+                    postgres_lsp = {},
+                    ty = {},
+                    helm_ls = {
+                        settings = {
+                            ["helm-ls"] = {
+                                yamlls = {
+                                    path = "yaml-language-server",
+                                },
                             },
                         },
                     },
-                },
-                lua_ls = {
-                    settings = {
-                        Lua = {
-                            runtime = {
-                                version = "LuaJIT",
-                            },
-                            diagnostics = {
-                                globals = { "vim", "Snacks" },
-                            },
-                            workspace = {
-                                checkThirdParty = false,
-                            },
-                            codeLens = {
-                                enable = true,
-                            },
-                            completion = {
-                                callSnippet = "Replace",
-                            },
-                            doc = {
-                                privateName = { "^_" },
-                            },
-                            hint = {
-                                enable = true,
-                                setType = false,
-                                paramType = true,
-                                paramName = "Disable",
-                                semicolon = "Disable",
-                                arrayIndex = "Disable",
+                    lua_ls = {
+                        settings = {
+                            Lua = {
+                                runtime = {
+                                    version = "LuaJIT",
+                                },
+                                diagnostics = {
+                                    globals = { "vim", "Snacks" },
+                                },
+                                workspace = {
+                                    checkThirdParty = false,
+                                },
+                                codeLens = {
+                                    enable = true,
+                                },
+                                completion = {
+                                    callSnippet = "Replace",
+                                },
+                                doc = {
+                                    privateName = { "^_" },
+                                },
+                                hint = {
+                                    enable = true,
+                                    setType = false,
+                                    paramType = true,
+                                    paramName = "Disable",
+                                    semicolon = "Disable",
+                                    arrayIndex = "Disable",
+                                },
                             },
                         },
                     },
+                    clangd = {},
+                    cmake = {},
+                    rust_analyzer = {},
+                    -- jinja-lsp: filetypes default to { "jinja" }; see vim.filetype.add below
+                    jinja_lsp = {},
                 },
-                clangd = {},
-                cmake = {},
-                rust_analyzer = {},
-            },
-        },
+            }
+        end,
         config = function(_, opts)
+            -- jinja-lsp does not auto-detect extensions; map template files to the "jinja" filetype
+            vim.filetype.add {
+                extension = {
+                    jinja = "jinja",
+                    jinja2 = "jinja",
+                    j2 = "jinja",
+                },
+            }
+
             -- Apply diagnostic configuration
             vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
@@ -159,6 +172,9 @@ return {
                     fileOperations = {
                         didRename = true,
                         willRename = true,
+                    },
+                    didChangeWatchedFiles = {
+                        dynamicRegistration = false,
                     },
                 },
             })
@@ -272,6 +288,7 @@ return {
                 "helm_ls",
                 "zls",
                 "rubocop",
+                "jinja_lsp",
             },
         },
     },
@@ -290,6 +307,7 @@ return {
         },
     },
     {
+        -- Helm-specific; disabled by default. Enable via lua/plugins/local/lsp.lua.
         "qvalentin/helm-ls.nvim",
         enabled = false,
         ft = "helm",

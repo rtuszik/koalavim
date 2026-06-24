@@ -83,3 +83,7 @@ opt.softtabstop = 4 -- Number of spaces per tab when editing
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
+
+if vim.g.neovide then
+    vim.g.neovide_theme = "dark"
+end
