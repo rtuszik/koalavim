@@ -59,7 +59,7 @@ This directory is automatically read if it exists.
 
 <!-- PLUGINS:START -->
 
-Total: **61** plugins
+Total: **62** plugins
 
 | Plugin | Link |
 |--------|------|
@@ -83,7 +83,6 @@ Total: **61** plugins
 | `folke/trouble.nvim` | [GitHub](https://github.com/folke/trouble.nvim) |
 | `folke/ts-comments.nvim` | [GitHub](https://github.com/folke/ts-comments.nvim) |
 | `folke/which-key.nvim` | [GitHub](https://github.com/folke/which-key.nvim) |
-| `giuxtaposition/blink-cmp-copilot` | [GitHub](https://github.com/giuxtaposition/blink-cmp-copilot) |
 | `h4ckm1n-dev/kube-utils-nvim` | [GitHub](https://github.com/h4ckm1n-dev/kube-utils-nvim) |
 | `hrsh7th/nvim-cmp` | [GitHub](https://github.com/hrsh7th/nvim-cmp) |
 | `iamcco/markdown-preview.nvim` | [GitHub](https://github.com/iamcco/markdown-preview.nvim) |
@@ -92,6 +91,7 @@ Total: **61** plugins
 | `jiaoshijie/undotree` | [GitHub](https://github.com/jiaoshijie/undotree) |
 | `kawre/neotab.nvim` | [GitHub](https://github.com/kawre/neotab.nvim) |
 | `kdheepak/lazygit.nvim` | [GitHub](https://github.com/kdheepak/lazygit.nvim) |
+| `Kurama622/llm.nvim` | [GitHub](https://github.com/Kurama622/llm.nvim) |
 | `L3MON4D3/LuaSnip` | [GitHub](https://github.com/L3MON4D3/LuaSnip) |
 | `lewis6991/gitsigns.nvim` | [GitHub](https://github.com/lewis6991/gitsigns.nvim) |
 | `mfussenegger/nvim-lint` | [GitHub](https://github.com/mfussenegger/nvim-lint) |
@@ -115,6 +115,7 @@ Total: **61** plugins
 | `sindrets/diffview.nvim` | [GitHub](https://github.com/sindrets/diffview.nvim) |
 | `stevearc/conform.nvim` | [GitHub](https://github.com/stevearc/conform.nvim) |
 | `szymonwilczek/vim-be-better` | [GitHub](https://github.com/szymonwilczek/vim-be-better) |
+| `ThePrimeagen/99` | [GitHub](https://github.com/ThePrimeagen/99) |
 | `ThePrimeagen/vim-be-good` | [GitHub](https://github.com/ThePrimeagen/vim-be-good) |
 | `tris203/precognition.nvim` | [GitHub](https://github.com/tris203/precognition.nvim) |
 | `WhoIsSethDaniel/mason-tool-installer.nvim` | [GitHub](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim) |
