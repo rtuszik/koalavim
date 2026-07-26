@@ -66,7 +66,8 @@ return {
                                 format = { enabled = false },
                                 -- enabling this conflicts between Kubernetes resources, kustomization.yaml, and Helmreleases
                                 validate = false,
-                                schemas = {
+                                -- handwritten entries win over the schemastore catalog on key collisions
+                                schemas = vim.tbl_extend("keep", {
                                     kubernetes = "*.yaml",
                                     ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
                                     ["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
@@ -80,8 +81,7 @@ return {
                                     ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = "*gitlab-ci*.{yml,yaml}",
                                     ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json"] = "*api*.{yml,yaml}",
                                     ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "*compose*.{yml,yaml}",
-                                    require("schemastore").yaml.schemas(),
-                                },
+                                }, require("schemastore").yaml.schemas()),
                             },
                         },
                     },
@@ -271,7 +271,7 @@ return {
                 "bashls",
                 "biome",
                 -- "oxfmt",
-                -- "oxlint",
+                "oxlint",
                 "dockerls",
                 "postgres_lsp",
                 "bashls",

@@ -2,7 +2,8 @@ return {
     "stevearc/conform.nvim",
     event = { "BufWritePre", "BufReadPost" }, -- ensure it actually loads
     opts = function()
-        local has_biome = vim.fs.root(0, { "biome.json", "biome.jsonc", "biome.json5" }) ~= nil
+        local has_biome = vim.fs.root(0, { "biome.json", "biome.jsonc", "biome.json5", ".biome.jsonc", ".biome.json" })
+            ~= nil
         local has_oxfmt = vim.fs.root(0, { ".oxfmtrc.json", ".oxfmtrc.jsonc" }) ~= nil
         local has_prettier = vim.fs.root(0, { ".prettierrc.json", ".prettierrc", ".prettierrc.yaml" }) ~= nil
         local opts = {
@@ -27,10 +28,11 @@ return {
                 javascriptreact = { "biome" },
                 typescriptreact = { "biome" },
                 css = { "biome" },
-                html = { "biome", "djlint" } or has_oxfmt and { "oxfmt" },
+                html = has_oxfmt and { "oxfmt" } or { "biome", "djlint" },
                 json = has_biome and { "biome" } or { "oxfmt" },
-                yaml = has_oxfmt and { "oxfmt" } or has_biome and { "biome" } or { "prettier" },
-                markdown = has_oxfmt and { "oxfmt" } or { "prettier" },
+                jsonc = has_biome and { "biome" } or { "oxfmt" },
+                yaml = has_prettier and { "prettier" } or { "yamlfmt" },
+                markdown = has_oxfmt and { "oxfmt" } or has_prettier and { "prettier" } or nil,
                 makefile = { "bake" },
                 graphql = { "biome" },
                 terraform = { "terraform_fmt" },
