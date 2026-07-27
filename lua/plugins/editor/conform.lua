@@ -35,7 +35,7 @@ return {
                 markdown = has_oxfmt and { "oxfmt" } or has_prettier and { "prettier" } or nil,
                 makefile = { "bake" },
                 graphql = { "biome" },
-                terraform = { "terraform_fmt" },
+                terraform = { "tofu_fmt" } or { "terraform_fmt" },
                 rust = { "rustfmt" },
                 c = { "clang-format" },
                 toml = has_oxfmt and { "oxfmt" } or { "tombi" },
