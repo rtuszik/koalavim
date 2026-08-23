@@ -84,6 +84,7 @@ return {
                     local special_files = {
                         ["kustomization.yaml"] = true,
                         [".env"] = true,
+                        [".env.example"] = true,
                         ["mise.toml"] = true,
                     }
                     local result = require("neo-tree.sources.common.components").name(config, node, state)
