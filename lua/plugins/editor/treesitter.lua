@@ -41,6 +41,7 @@ local parsers = {
     "yaml",
     "zig",
     "zsh",
+    "vhs",
 }
 
 return {

@@ -6,6 +6,7 @@ return {
             ~= nil
         local has_oxfmt = vim.fs.root(0, { ".oxfmtrc.json", ".oxfmtrc.jsonc" }) ~= nil
         local has_prettier = vim.fs.root(0, { ".prettierrc.json", ".prettierrc", ".prettierrc.yaml" }) ~= nil
+        local has_rumdl = vim.fs.root(0, { ".rumdl.toml", "rumdl.toml" }) ~= nil
         local opts = {
             format_on_save = function(buf)
                 -- Skip if autoformat is disabled
@@ -23,16 +24,16 @@ return {
             formatters_by_ft = {
                 lua = { "stylua" },
                 python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
-                javascript = { "biome" },
-                typescript = { "biome" },
+                javascript = has_oxfmt and { "oxfmt" } or { "biome" },
+                typescript = has_oxfmt and { "oxfmt" } or { "biome" },
                 javascriptreact = { "biome" },
                 typescriptreact = { "biome" },
                 css = { "biome" },
                 html = has_oxfmt and { "oxfmt" } or { "biome", "djlint" },
                 json = has_biome and { "biome" } or { "oxfmt" },
                 jsonc = has_biome and { "biome" } or { "oxfmt" },
-                yaml = has_prettier and { "prettier" } or { "yamlfmt" },
-                markdown = has_oxfmt and { "oxfmt" } or has_prettier and { "prettier" } or nil,
+                yaml = has_prettier and { "prettier" } or has_oxfmt and { "oxfmt" } or { "yamlfmt" },
+                markdown = has_oxfmt and { "oxfmt" } or has_prettier and { "prettier" } or has_rumdl and { "rumdl" },
                 makefile = { "bake" },
                 graphql = { "biome" },
                 terraform = { "tofu_fmt" } or { "terraform_fmt" },
