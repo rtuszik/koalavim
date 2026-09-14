@@ -144,7 +144,11 @@ return {
                     },
                     clangd = {},
                     cmake = {},
-                    rust_analyzer = {},
+                    rust_analyzer = {
+                        rustfmt = {
+                            overrideCommand = { "leptosfmt", "--stdin", "--rustfmt" },
+                        },
+                    },
                     -- jinja-lsp: filetypes default to { "jinja" }; see vim.filetype.add below
                     jinja_lsp = {},
                 },

@@ -15,6 +15,12 @@ return {
 
     opts = {
         bigfile = { enabled = true },
+        lazygit = {
+            win = {
+                width = 0.95,
+                height = 0.95,
+            },
+        },
         terminal = {
             win = {
                 keys = {
