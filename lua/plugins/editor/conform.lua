@@ -2,11 +2,7 @@ return {
     "stevearc/conform.nvim",
     event = { "BufWritePre", "BufReadPost" }, -- ensure it actually loads
     opts = function()
-        local has_biome = vim.fs.root(0, { "biome.json", "biome.jsonc", "biome.json5", ".biome.jsonc", ".biome.json" })
-            ~= nil
-        local has_oxfmt = vim.fs.root(0, { ".oxfmtrc.json", ".oxfmtrc.jsonc" }) ~= nil
-        local has_prettier = vim.fs.root(0, { ".prettierrc.json", ".prettierrc", ".prettierrc.yaml" }) ~= nil
-        local has_rumdl = vim.fs.root(0, { ".rumdl.toml", "rumdl.toml" }) ~= nil
+        local project_formatters = require "config.formatters"
         local opts = {
             format_on_save = function(buf)
                 -- Skip if autoformat is disabled
@@ -21,31 +17,7 @@ return {
                 end
                 return { timeout_ms = 2000, lsp_format = "fallback" }
             end,
-            formatters_by_ft = {
-                lua = { "stylua" },
-                python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
-                javascript = has_oxfmt and { "oxfmt" } or { "biome" },
-                typescript = has_oxfmt and { "oxfmt" } or { "biome" },
-                javascriptreact = { "biome" },
-                typescriptreact = { "biome" },
-                css = { "biome" },
-                html = has_oxfmt and { "oxfmt" } or { "biome", "djlint" },
-                json = has_biome and { "biome" } or { "oxfmt" },
-                jsonc = has_biome and { "biome" } or { "oxfmt" },
-                yaml = has_prettier and { "prettier" } or has_oxfmt and { "oxfmt" } or { "yamlfmt" },
-                markdown = has_oxfmt and { "oxfmt" } or has_prettier and { "prettier" } or has_rumdl and { "rumdl" },
-                makefile = { "bake" },
-                graphql = { "biome" },
-                terraform = { "tofu_fmt" } or { "terraform_fmt" },
-                rust = { "rustfmt" },
-                c = { "clang-format" },
-                toml = has_oxfmt and { "oxfmt" } or { "tombi" },
-                php = { "mago_format" },
-                zig = { "zigfmt" },
-                scss = { "stylelint" },
-                go = { "gofmt" },
-                ruby = { "rubocop" },
-            },
+            formatters_by_ft = {},
             formatters = {
                 prettier = {
                     -- prepend_args = { "--tab-width", "4", "--print-width", "100" },
@@ -71,11 +43,23 @@ return {
                     -- append_args = { "--json-formatter-expand", "always" },
                 },
                 oxfmt = {
-                    prepend_args = not has_oxfmt and { "--config", vim.fn.expand "~/.config/oxfmt/.oxfmtrc.json" }
-                        or {},
+                    prepend_args = function(_, ctx)
+                        if vim.fs.root(ctx.buf, { ".oxfmtrc.json", ".oxfmtrc.jsonc" }) then
+                            return {}
+                        end
+                        return { "--config", vim.fn.expand "~/.config/oxfmt/.oxfmtrc.json" }
+                    end,
                 },
             },
         }
+        for filetype in pairs(project_formatters.defaults(0)) do
+            opts.formatters_by_ft[filetype] = function(buf)
+                return project_formatters.resolve(buf, filetype)
+            end
+        end
+        opts.formatters_by_ft._ = function(buf)
+            return project_formatters.resolve(buf, vim.bo[buf].filetype)
+        end
         return opts
     end,
 }
