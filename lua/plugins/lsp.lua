@@ -297,20 +297,6 @@ return {
         },
     },
     {
-        "WhoIsSethDaniel/mason-tool-installer.nvim",
-        dependencies = { "williamboman/mason.nvim" },
-        opts = {
-            run_on_start = true,
-            ensure_installed = {
-                "stylua",
-                "shellcheck",
-                "shfmt",
-                "yamlfmt",
-                "yamllint",
-            },
-        },
-    },
-    {
         -- Helm-specific; disabled by default. Enable via lua/plugins/local/lsp.lua.
         "qvalentin/helm-ls.nvim",
         enabled = false,
