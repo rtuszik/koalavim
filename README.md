@@ -59,7 +59,7 @@ This directory is automatically read if it exists.
 
 <!-- PLUGINS:START -->
 
-Total: **62** plugins
+Total: **61** plugins
 
 | Plugin | Link |
 |--------|------|
@@ -118,7 +118,6 @@ Total: **62** plugins
 | `ThePrimeagen/99` | [GitHub](https://github.com/ThePrimeagen/99) |
 | `ThePrimeagen/vim-be-good` | [GitHub](https://github.com/ThePrimeagen/vim-be-good) |
 | `tris203/precognition.nvim` | [GitHub](https://github.com/tris203/precognition.nvim) |
-| `WhoIsSethDaniel/mason-tool-installer.nvim` | [GitHub](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim) |
 | `williamboman/mason-lspconfig.nvim` | [GitHub](https://github.com/williamboman/mason-lspconfig.nvim) |
 | `williamboman/mason.nvim` | [GitHub](https://github.com/williamboman/mason.nvim) |
 | `windwp/nvim-ts-autotag` | [GitHub](https://github.com/windwp/nvim-ts-autotag) |
