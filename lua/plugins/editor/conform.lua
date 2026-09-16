@@ -15,7 +15,13 @@ return {
                 if ok and stats and stats.size > max_size then
                     return nil
                 end
-                return { timeout_ms = 2000, lsp_format = "fallback" }
+                -- Ruby has no conform formatter, so this falls through to the
+                -- rubocop LSP (see lsp.lua). That process is already running by
+                -- save time, but its first textDocument/formatting request loads
+                -- the cop set lazily and measured ~3.1s; steady state is <1.2s
+                -- even on a 2800-line file.
+                local timeout_ms = vim.bo[buf].filetype == "ruby" and 5000 or 2000
+                return { timeout_ms = timeout_ms, lsp_format = "fallback" }
             end,
             formatters_by_ft = {},
             formatters = {

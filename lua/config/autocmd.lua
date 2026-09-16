@@ -153,3 +153,13 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
         vim.diagnostic.enable(false, { bufnr = e.buf })
     end,
 })
+
+vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
+    group = augroup "yaml_jinja",
+    callback = function(event)
+        local name = vim.api.nvim_buf_get_name(event.buf)
+        if name:match "%.ya?ml%.j2$" then
+            vim.bo[event.buf].syntax = "yaml.jinja"
+        end
+    end,
+})
