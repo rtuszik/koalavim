@@ -70,6 +70,9 @@ jobs:
               shell: bash
               run: |
                 set -euo pipefail
+                mkdir -p "${GITHUB_WORKSPACE}/base/lua/local/plugins"
+                cp "${GITHUB_WORKSPACE}/head/benchmarks/startup/steady_state.lua" \
+                    "${GITHUB_WORKSPACE}/base/lua/local/plugins/benchmark.lua"
                 mkdir -p "${RUNNER_TEMP}/koalavim-base/config" "${RUNNER_TEMP}/koalavim-base/data" \
                     "${RUNNER_TEMP}/koalavim-base/state" "${RUNNER_TEMP}/koalavim-base/cache"
                 ln -s "${GITHUB_WORKSPACE}/base" "${RUNNER_TEMP}/koalavim-base/config/nvim"
@@ -92,6 +95,9 @@ jobs:
               shell: bash
               run: |
                 set -euo pipefail
+                mkdir -p "${GITHUB_WORKSPACE}/head/lua/local/plugins"
+                cp "${GITHUB_WORKSPACE}/head/benchmarks/startup/steady_state.lua" \
+                    "${GITHUB_WORKSPACE}/head/lua/local/plugins/benchmark.lua"
                 mkdir -p "${RUNNER_TEMP}/koalavim-head/config" "${RUNNER_TEMP}/koalavim-head/data" \
                     "${RUNNER_TEMP}/koalavim-head/state" "${RUNNER_TEMP}/koalavim-head/cache"
                 ln -s "${GITHUB_WORKSPACE}/head" "${RUNNER_TEMP}/koalavim-head/config/nvim"

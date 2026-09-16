@@ -11,3 +11,13 @@ package.preload["nvim-treesitter"] = function()
     module.install = function() end
     return module
 end
+
+-- The workflow also copies this file into local.plugins so old base revisions
+-- without optional-import handling can start with the same disabled fixture.
+return {
+    {
+        name = "koalavim-benchmark-placeholder",
+        dir = vim.fn.stdpath "config",
+        enabled = false,
+    },
+}
