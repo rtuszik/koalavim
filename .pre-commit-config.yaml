@@ -14,3 +14,16 @@ repos:
       rev: v1.8.1
       hooks:
         - id: betterleaks
+
+    - repo: local
+      hooks:
+        - id: zizmor
+          name: zizmor
+          entry: zizmor --offline
+          language: system
+          files: ^\.github/workflows/.*\.ya?ml$
+
+    - repo: https://github.com/rhysd/actionlint
+      rev: v1.7.12
+      hooks:
+        - id: actionlint

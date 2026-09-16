@@ -3,3 +3,6 @@ lazyvim.json
 .sops.yaml
 lua/local/*
 !lua/local/config.example.lua
+.DS_Store
+__pycache__/
+benchmarks/startup/results/

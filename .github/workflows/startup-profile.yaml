@@ -1,0 +1,150 @@
+---
+name: Profile startup
+
+on:
+    pull_request:
+        paths:
+            - ".github/workflows/startup-profile.yaml"
+            - "benchmarks/startup/**"
+            - "init.lua"
+            - "lazy-lock.json"
+            - "lua/**"
+    push:
+        branches: [main]
+        paths:
+            - ".github/workflows/startup-profile.yaml"
+            - "benchmarks/startup/**"
+            - "init.lua"
+            - "lazy-lock.json"
+            - "lua/**"
+    workflow_dispatch:
+        inputs:
+            base_ref:
+                description: Git ref to compare with the selected revision
+                required: true
+                default: main
+
+permissions:
+    contents: read
+
+concurrency:
+    group: startup-profile-${{ github.event.pull_request.number || github.ref }}
+    cancel-in-progress: true
+
+env:
+    NEOVIM_VERSION: v0.12.5
+    NEOVIM_SHA256: bce0f56eda1f1b1db6eee8f4133d7a38813ea07933837dd1777411ca384c6875
+
+jobs:
+    profile:
+        runs-on: ubuntu-24.04
+        steps:
+            - name: Check out head
+              uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+              with:
+                repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+                ref: ${{ github.event.pull_request.head.sha || github.sha }}
+                path: head
+                persist-credentials: false
+
+            - name: Check out base
+              uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+              with:
+                ref: ${{ github.event.pull_request.base.sha || github.event.before || inputs.base_ref }}
+                path: base
+                persist-credentials: false
+
+            - name: Install Neovim
+              shell: bash
+              run: |
+                set -euo pipefail
+                archive="nvim-linux-x86_64.tar.gz"
+                release="https://github.com/neovim/neovim/releases/download/${NEOVIM_VERSION}"
+                curl --fail --location --silent --show-error --output "${RUNNER_TEMP}/${archive}" "${release}/${archive}"
+                cd "${RUNNER_TEMP}"
+                echo "${NEOVIM_SHA256}  ${archive}" | sha256sum --check -
+                tar --extract --gzip --file "${archive}"
+                echo "${RUNNER_TEMP}/nvim-linux-x86_64/bin" >> "${GITHUB_PATH}"
+
+            - name: Restore base plugins
+              shell: bash
+              run: |
+                set -euo pipefail
+                mkdir -p "${RUNNER_TEMP}/koalavim-base/config" "${RUNNER_TEMP}/koalavim-base/data" \
+                    "${RUNNER_TEMP}/koalavim-base/state" "${RUNNER_TEMP}/koalavim-base/cache"
+                ln -s "${GITHUB_WORKSPACE}/base" "${RUNNER_TEMP}/koalavim-base/config/nvim"
+                XDG_CONFIG_HOME="${RUNNER_TEMP}/koalavim-base/config" \
+                XDG_DATA_HOME="${RUNNER_TEMP}/koalavim-base/data" \
+                XDG_STATE_HOME="${RUNNER_TEMP}/koalavim-base/state" \
+                XDG_CACHE_HOME="${RUNNER_TEMP}/koalavim-base/cache" \
+                    nvim --headless \
+                        --cmd "lua dofile('${GITHUB_WORKSPACE}/head/benchmarks/startup/steady_state.lua')" \
+                        "+Lazy! sync" +qa
+                XDG_CONFIG_HOME="${RUNNER_TEMP}/koalavim-base/config" \
+                XDG_DATA_HOME="${RUNNER_TEMP}/koalavim-base/data" \
+                XDG_STATE_HOME="${RUNNER_TEMP}/koalavim-base/state" \
+                XDG_CACHE_HOME="${RUNNER_TEMP}/koalavim-base/cache" \
+                    nvim --headless \
+                        --cmd "lua dofile('${GITHUB_WORKSPACE}/head/benchmarks/startup/steady_state.lua')" \
+                        "+lua require('nvim-treesitter.install').install({'lua'}):wait()" +qa
+
+            - name: Restore head plugins
+              shell: bash
+              run: |
+                set -euo pipefail
+                mkdir -p "${RUNNER_TEMP}/koalavim-head/config" "${RUNNER_TEMP}/koalavim-head/data" \
+                    "${RUNNER_TEMP}/koalavim-head/state" "${RUNNER_TEMP}/koalavim-head/cache"
+                ln -s "${GITHUB_WORKSPACE}/head" "${RUNNER_TEMP}/koalavim-head/config/nvim"
+                XDG_CONFIG_HOME="${RUNNER_TEMP}/koalavim-head/config" \
+                XDG_DATA_HOME="${RUNNER_TEMP}/koalavim-head/data" \
+                XDG_STATE_HOME="${RUNNER_TEMP}/koalavim-head/state" \
+                XDG_CACHE_HOME="${RUNNER_TEMP}/koalavim-head/cache" \
+                    nvim --headless \
+                        --cmd "lua dofile('${GITHUB_WORKSPACE}/head/benchmarks/startup/steady_state.lua')" \
+                        "+Lazy! sync" +qa
+                XDG_CONFIG_HOME="${RUNNER_TEMP}/koalavim-head/config" \
+                XDG_DATA_HOME="${RUNNER_TEMP}/koalavim-head/data" \
+                XDG_STATE_HOME="${RUNNER_TEMP}/koalavim-head/state" \
+                XDG_CACHE_HOME="${RUNNER_TEMP}/koalavim-head/cache" \
+                    nvim --headless \
+                        --cmd "lua dofile('${GITHUB_WORKSPACE}/head/benchmarks/startup/steady_state.lua')" \
+                        "+lua require('nvim-treesitter.install').install({'lua'}):wait()" +qa
+
+            - name: Profile base
+              shell: bash
+              run: |
+                set -euo pipefail
+                XDG_CONFIG_HOME="${RUNNER_TEMP}/koalavim-base/config" \
+                XDG_DATA_HOME="${RUNNER_TEMP}/koalavim-base/data" \
+                XDG_STATE_HOME="${RUNNER_TEMP}/koalavim-base/state" \
+                XDG_CACHE_HOME="${RUNNER_TEMP}/koalavim-base/cache" \
+                    nvim --clean --headless -l head/benchmarks/startup/run.lua -- \
+                        base --root base --output-root "${RUNNER_TEMP}/koalavim-results" --runs 10 --warmups 2
+
+            - name: Profile head
+              shell: bash
+              run: |
+                set -euo pipefail
+                XDG_CONFIG_HOME="${RUNNER_TEMP}/koalavim-head/config" \
+                XDG_DATA_HOME="${RUNNER_TEMP}/koalavim-head/data" \
+                XDG_STATE_HOME="${RUNNER_TEMP}/koalavim-head/state" \
+                XDG_CACHE_HOME="${RUNNER_TEMP}/koalavim-head/cache" \
+                    nvim --clean --headless -l head/benchmarks/startup/run.lua -- \
+                        head --root head --output-root "${RUNNER_TEMP}/koalavim-results" --runs 10 --warmups 2
+
+            - name: Publish comparison
+              shell: bash
+              run: |
+                set -euo pipefail
+                nvim --clean --headless -l head/benchmarks/startup/compare.lua -- \
+                    "${RUNNER_TEMP}/koalavim-results/base" "${RUNNER_TEMP}/koalavim-results/head" --markdown \
+                    | tee -a "${GITHUB_STEP_SUMMARY}"
+
+            - name: Upload raw profiles
+              if: always()
+              uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+              with:
+                name: neovim-startup-profile-${{ github.run_id }}
+                path: ${{ runner.temp }}/koalavim-results
+                if-no-files-found: warn
+                retention-days: 30
