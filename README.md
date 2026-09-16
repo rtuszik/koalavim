@@ -59,7 +59,7 @@ This directory is automatically read if it exists.
 
 <!-- PLUGINS:START -->
 
-Total: **61** plugins
+Total: **56** plugins
 
 | Plugin | Link |
 |--------|------|
@@ -68,7 +68,6 @@ Total: **61** plugins
 | `aserowy/tmux.nvim` | [GitHub](https://github.com/aserowy/tmux.nvim) |
 | `b0o/schemastore.nvim` | [GitHub](https://github.com/b0o/schemastore.nvim) |
 | `blumaa/ohne-accidents.nvim` | [GitHub](https://github.com/blumaa/ohne-accidents.nvim) |
-| `catppuccin/nvim` | [GitHub](https://github.com/catppuccin/nvim) |
 | `christoomey/vim-tmux-navigator` | [GitHub](https://github.com/christoomey/vim-tmux-navigator) |
 | `dmtrKovalenko/fff.nvim` | [GitHub](https://github.com/dmtrKovalenko/fff.nvim) |
 | `echasnovski/mini.nvim` | [GitHub](https://github.com/echasnovski/mini.nvim) |
@@ -79,7 +78,6 @@ Total: **61** plugins
 | `folke/noice.nvim` | [GitHub](https://github.com/folke/noice.nvim) |
 | `folke/snacks.nvim` | [GitHub](https://github.com/folke/snacks.nvim) |
 | `folke/todo-comments.nvim` | [GitHub](https://github.com/folke/todo-comments.nvim) |
-| `folke/tokyonight.nvim` | [GitHub](https://github.com/folke/tokyonight.nvim) |
 | `folke/trouble.nvim` | [GitHub](https://github.com/folke/trouble.nvim) |
 | `folke/ts-comments.nvim` | [GitHub](https://github.com/folke/ts-comments.nvim) |
 | `folke/which-key.nvim` | [GitHub](https://github.com/folke/which-key.nvim) |
@@ -108,8 +106,6 @@ Total: **61** plugins
 | `olimorris/onedarkpro.nvim` | [GitHub](https://github.com/olimorris/onedarkpro.nvim) |
 | `prismatic-koi/nvim-sops` | [GitHub](https://github.com/prismatic-koi/nvim-sops) |
 | `qvalentin/helm-ls.nvim` | [GitHub](https://github.com/qvalentin/helm-ls.nvim) |
-| `rebelot/kanagawa.nvim` | [GitHub](https://github.com/rebelot/kanagawa.nvim) |
-| `rose-pine/neovim` | [GitHub](https://github.com/rose-pine/neovim) |
 | `rtuszik/nvim-remove-comments` | [GitHub](https://github.com/rtuszik/nvim-remove-comments) |
 | `saghen/blink.cmp` | [GitHub](https://github.com/saghen/blink.cmp) |
 | `sindrets/diffview.nvim` | [GitHub](https://github.com/sindrets/diffview.nvim) |
@@ -121,7 +117,6 @@ Total: **61** plugins
 | `williamboman/mason-lspconfig.nvim` | [GitHub](https://github.com/williamboman/mason-lspconfig.nvim) |
 | `williamboman/mason.nvim` | [GitHub](https://github.com/williamboman/mason.nvim) |
 | `windwp/nvim-ts-autotag` | [GitHub](https://github.com/windwp/nvim-ts-autotag) |
-| `yazeed1s/oh-lucy.nvim` | [GitHub](https://github.com/yazeed1s/oh-lucy.nvim) |
 | `zaldih/themery.nvim` | [GitHub](https://github.com/zaldih/themery.nvim) |
 | `zbirenbaum/copilot.lua` | [GitHub](https://github.com/zbirenbaum/copilot.lua) |
 
