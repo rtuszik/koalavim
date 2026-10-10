@@ -5,8 +5,9 @@ return {
         opts = {
             events = { "BufWritePost", "BufReadPost", "InsertLeave" },
             linters_by_ft = {
-                yaml = { "kube_linter" },
+                yaml = { "kube_linter", "jactionlint" },
                 php = { "mago_lint", "mago_analyze" },
+                sql = { "squawk" },
             },
             linters = {}, -- Leave empty to avoid overwrite issues
         },
@@ -34,6 +35,13 @@ return {
             local kube = lint.linters.kube_linter --[[@as KoalaLintLinter]]
             kube.condition = function()
                 return vim.fn.search("apiVersion:", "nw") > 0
+            end
+
+            lint.linters.jactionlint =
+                vim.tbl_deep_extend("force", require "lint.linters.actionlint", { cmd = "jactionlint" })
+            local jal = lint.linters.jactionlint --[[@as KoalaLintLinter]]
+            jal.condition = function(ctx)
+                return ctx.filename:match "/%.github/workflows/" ~= nil
             end
 
             local trivy = lint.linters.trivy
