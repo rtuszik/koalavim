@@ -13,7 +13,7 @@ function M.defaults(buf)
         typescript = has_oxfmt and { "oxfmt" } or { "biome" },
         javascriptreact = { "biome" },
         typescriptreact = { "biome" },
-        css = { "biome" },
+        css = has_oxfmt and { "oxfmt" } or { "biome" },
         html = has_oxfmt and { "oxfmt" } or { "biome", "djlint" },
         json = has_biome and { "biome" } or { "oxfmt" },
         jsonc = has_biome and { "biome" } or { "oxfmt" },

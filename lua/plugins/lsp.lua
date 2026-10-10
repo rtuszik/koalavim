@@ -291,7 +291,6 @@ return {
                 "tombi",
                 "helm_ls",
                 "zls",
-                "rubocop",
                 "jinja_lsp",
             },
         },
