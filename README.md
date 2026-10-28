@@ -59,7 +59,7 @@ This directory is automatically read if it exists.
 
 <!-- PLUGINS:START -->
 
-Total: **56** plugins
+Total: **57** plugins
 
 | Plugin | Link |
 |--------|------|
@@ -67,6 +67,7 @@ Total: **56** plugins
 | `antonk52/bad-practices.nvim` | [GitHub](https://github.com/antonk52/bad-practices.nvim) |
 | `aserowy/tmux.nvim` | [GitHub](https://github.com/aserowy/tmux.nvim) |
 | `b0o/schemastore.nvim` | [GitHub](https://github.com/b0o/schemastore.nvim) |
+| `baggiponte/rex-navigator.nvim` | [GitHub](https://github.com/baggiponte/rex-navigator.nvim) |
 | `blumaa/ohne-accidents.nvim` | [GitHub](https://github.com/blumaa/ohne-accidents.nvim) |
 | `christoomey/vim-tmux-navigator` | [GitHub](https://github.com/christoomey/vim-tmux-navigator) |
 | `dmtrKovalenko/fff.nvim` | [GitHub](https://github.com/dmtrKovalenko/fff.nvim) |
