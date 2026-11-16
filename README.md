@@ -59,7 +59,7 @@ This directory is automatically read if it exists.
 
 <!-- PLUGINS:START -->
 
-Total: **57** plugins
+Total: **58** plugins
 
 | Plugin | Link |
 |--------|------|
@@ -86,6 +86,7 @@ Total: **57** plugins
 | `hrsh7th/nvim-cmp` | [GitHub](https://github.com/hrsh7th/nvim-cmp) |
 | `iamcco/markdown-preview.nvim` | [GitHub](https://github.com/iamcco/markdown-preview.nvim) |
 | `ibhagwan/fzf-lua` | [GitHub](https://github.com/ibhagwan/fzf-lua) |
+| `ivankovic/omnidiff.nvim` | [GitHub](https://github.com/ivankovic/omnidiff.nvim) |
 | `j-hui/fidget.nvim` | [GitHub](https://github.com/j-hui/fidget.nvim) |
 | `jiaoshijie/undotree` | [GitHub](https://github.com/jiaoshijie/undotree) |
 | `kawre/neotab.nvim` | [GitHub](https://github.com/kawre/neotab.nvim) |
