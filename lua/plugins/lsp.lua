@@ -46,6 +46,7 @@ return {
                     ruff = {},
                     bashls = {},
                     biome = {},
+                    svelte = {},
 
                     yamlls = {
                         capabilities = {
